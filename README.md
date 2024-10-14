@@ -1,6 +1,10 @@
-# template-vue-pocketbase
 
-This template should help get you started developing with Vue 3 in Vite.
+# Portfolio - Pierre Gachod
+
+NOM : Gachod
+PRÉNOM : Pierre
+URL du site : https://portfolio.pierre-gachod.fr
+URL FIGMA : 
 
 ## Recommended IDE Setup
 

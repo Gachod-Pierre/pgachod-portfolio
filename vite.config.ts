@@ -22,6 +22,6 @@ export default defineConfig({
   // décommenter pour build en mode production directement dans pocketbase
   ,
   build: {
-    outDir: './pocketbase/pb_public'
+    // outDir: './pocketbase/pb_public'
   }
 })
