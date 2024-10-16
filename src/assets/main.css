@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'CocoSharp';
+  src: 
+    url('./Fonts/Coco-Sharp-Regular.ttf') format('truetype'),
+    url('./Fonts/Coco-Sharp-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CocoSharp';
+  src: 
+    url('./Fonts/Coco-Sharp-Bold.ttf') format('truetype'),
+    url('./Fonts/Coco-Sharp-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CocoSharp';
+  src: 
+    url('./Fonts/Coco-Sharp-Extrabold.ttf') format('truetype'),
+    url('./Fonts/Coco-Sharp-Extrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CocoSharp';
+  src: 
+    url('./Fonts/Coco-Sharp-Heavy.ttf') format('truetype'),
+    url('./Fonts/Coco-Sharp-Heavy.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CocoSharp';
+  src: 
+    url('./Fonts/Coco-Sharp-Light.ttf') format('truetype'),
+    url('./Fonts/Coco-Sharp-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CocoSharp';
+  src: 
+    url('./Fonts/Coco-Sharp-Extralight.ttf') format('truetype'),
+    url('./Fonts/Coco-Sharp-Extralight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CocoSharp';
+  src: 
+    url('./Fonts/Coco-Sharp-Italic.otf') format('opentype'),
+    url('./Fonts/Coco-Sharp-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'CocoSharp';
+  src: 
+    url('./Fonts/Coco-Sharp-Heavy.ttf') format('truetype'),
+    url('./Fonts/Coco-Sharp-Heavy.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+
+@layer base {
+  body {
+    font-family: 'CocoSharp', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    @apply text-base leading-relaxed lg:leading-relaxed lg:text-lg;
+  }
+  .title1 {
+    font-family: 'CocoSharp', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    @apply text-white text-4xl leading-tight lg:text-9xl;
+  }
+
+  .title2 {
+    font-family: 'CocoSharp', sans-serif;
+    font-weight: 200;
+    letter-spacing: 0.01em;
+    @apply text-white text-4xl leading-tight lg:text-9xl;
+  }
+
+  h1 {
+    font-family: 'CocoSharp', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    @apply text-white text-4xl leading-tight lg:text-9xl;
+  }
+
+  h2 {
+    font-family: 'CocoSharp', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    @apply text-2xl leading-tight lg:text-5xl;
+  }
+  h3 {
+    font-family: 'CocoSharp', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    @apply text-base leading-tight lg:text-xl;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-full mx-auto lg:px-24 px-6;
+  }
+}
+
+body {
+  margin-left : 50px;
+  margin-right : 50px;
+  height: 100vh;
+  background-color: #000;
+}
+
+@keyframes oscillation {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.oscillate {
+  animation: oscillation 1.5s ease-in-out infinite; 
+}
