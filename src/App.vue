@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router/auto'
-import LogInOut from './components/LogInOut.vue';
-import LogInOutGoogle from './components/LogInOutGoogle.vue';
+import LogInOut from './components/LogInOut.vue'
 </script>
 
 <template>
-  <h1 class="text-2xl font-bold">template principale (Menu/footer...)</h1>
-  <LogInOut/>
-  <LogInOutGoogle/>
+  <LogInOut />
   <nav>
     <ul>
       <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/projets">projets</RouterLink>
     </ul>
   </nav>
   <main>
-    <RouterView/>
+    <RouterView v-slot="{ Component }">
+      <Suspense>
+        <component :is="Component" :key="$route.path" />
+      </Suspense>
+    </RouterView>
   </main>
 </template>
-
