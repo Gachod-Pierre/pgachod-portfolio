@@ -5,12 +5,11 @@
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "types": ["unplugin-vue-router/client"],
-    "moduleResolution": "Bundler",
+
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["unplugin-vue-router/client"]
   }
 }
-

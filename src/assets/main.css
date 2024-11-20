@@ -6,9 +6,17 @@
 @tailwind components;
 @tailwind utilities;
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
+div::-webkit-scrollbar {
+  display: none;
+}
+
 @font-face {
   font-family: 'CocoSharp';
-  src: 
+  src:
     url('./Fonts/Coco-Sharp-Regular.ttf') format('truetype'),
     url('./Fonts/Coco-Sharp-Regular.otf') format('opentype');
   font-weight: 400;
@@ -17,7 +25,7 @@
 
 @font-face {
   font-family: 'CocoSharp';
-  src: 
+  src:
     url('./Fonts/Coco-Sharp-Bold.ttf') format('truetype'),
     url('./Fonts/Coco-Sharp-Bold.otf') format('opentype');
   font-weight: 700;
@@ -26,7 +34,7 @@
 
 @font-face {
   font-family: 'CocoSharp';
-  src: 
+  src:
     url('./Fonts/Coco-Sharp-Extrabold.ttf') format('truetype'),
     url('./Fonts/Coco-Sharp-Extrabold.otf') format('opentype');
   font-weight: 800;
@@ -35,7 +43,7 @@
 
 @font-face {
   font-family: 'CocoSharp';
-  src: 
+  src:
     url('./Fonts/Coco-Sharp-Heavy.ttf') format('truetype'),
     url('./Fonts/Coco-Sharp-Heavy.otf') format('opentype');
   font-weight: 900;
@@ -44,7 +52,7 @@
 
 @font-face {
   font-family: 'CocoSharp';
-  src: 
+  src:
     url('./Fonts/Coco-Sharp-Light.ttf') format('truetype'),
     url('./Fonts/Coco-Sharp-Light.otf') format('opentype');
   font-weight: 300;
@@ -53,7 +61,7 @@
 
 @font-face {
   font-family: 'CocoSharp';
-  src: 
+  src:
     url('./Fonts/Coco-Sharp-Extralight.ttf') format('truetype'),
     url('./Fonts/Coco-Sharp-Extralight.otf') format('opentype');
   font-weight: 200;
@@ -62,7 +70,7 @@
 
 @font-face {
   font-family: 'CocoSharp';
-  src: 
+  src:
     url('./Fonts/Coco-Sharp-Italic.otf') format('opentype'),
     url('./Fonts/Coco-Sharp-Italic.ttf') format('truetype');
   font-weight: 400;
@@ -71,13 +79,12 @@
 
 @font-face {
   font-family: 'CocoSharp';
-  src: 
+  src:
     url('./Fonts/Coco-Sharp-Heavy.ttf') format('truetype'),
     url('./Fonts/Coco-Sharp-Heavy.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
 }
-
 
 @layer base {
   body {
@@ -128,6 +135,36 @@
 }
 
 @media (min-width: 1024px) {
+  body {
+    width: calc(100vw - 360px); /* Largeur totale moins 300px sur la droite */
+  }
+}
+
+body {
+  margin-left: 30px;
+  margin-right: 30px;
+  background-color: #000;
+  cursor: none !important;
+  overflow-x: hidden; /* Empêche le scroll horizontal */
+}
+
+html {
+  cursor: none !important;
+  scroll-behavior: smooth; /* Défilement fluide */
+}
+
+* {
+  cursor: none !important; /* Assure que tous les éléments aient le curseur caché */
+}
+
+a,
+button {
+  cursor: none;
+}
+
+
+
+@media (min-width: 1024px) {
   .custom-cursor {
     width: 20px;
     height: 20px;
@@ -137,6 +174,7 @@
     transition: transform 200ms ease-out; /* Transition uniquement sur la transformation */
     animation: cursorAnim 0.5s infinite alternate;
     pointer-events: none;
+    z-index: 9999;
   }
 
   .custom-cursor::after {
@@ -150,6 +188,7 @@
     top: -6px;
     left: -6px;
     animation: cursorAnim2 0.5s infinite alternate;
+    z-index: 9999;
   }
 
   @keyframes cursorAnim {
@@ -191,16 +230,9 @@
   }
 }
 
-body {
-  margin-left : 50px;
-  margin-right : 50px;
-  height: 100vh;
-  cursor: none;
-  background-color: #000;
-}
-
 @keyframes oscillation {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -209,5 +241,5 @@ body {
 }
 
 .oscillate {
-  animation: oscillation 1.5s ease-in-out infinite; 
+  animation: oscillation 1.5s ease-in-out infinite;
 }
