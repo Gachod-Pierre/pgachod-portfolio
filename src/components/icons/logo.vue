@@ -3,8 +3,8 @@
     id="Calque_2"
     data-name="Calque 2"
     xmlns="http://www.w3.org/2000/svg"
-    width="183.78"
-    height="202.08"
+    width="55.134"
+    height="60.624"
     viewBox="0 0 183.78 202.08"
   >
     <g id="Calque_1-2" data-name="Calque 1">

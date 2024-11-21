@@ -97,14 +97,14 @@ div::-webkit-scrollbar {
     font-family: 'CocoSharp', sans-serif;
     font-weight: 800;
     letter-spacing: 0.05em;
-    @apply text-white text-4xl leading-tight lg:text-9xl;
+    @apply text-white text-7xl leading-tight lg:text-9xl;
   }
 
   .title2 {
     font-family: 'CocoSharp', sans-serif;
     font-weight: 200;
     letter-spacing: 0.01em;
-    @apply text-white text-4xl leading-tight lg:text-9xl;
+    @apply text-white text-7xl leading-tight lg:text-9xl;
   }
 
   h1 {

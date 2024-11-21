@@ -17,7 +17,7 @@ function closeMenu() {
     :class="{ '!bg-black': activeMenu }"
   >
     <RouterLink to="/" @click="closeMenu" class="flex justify-center items-center">
-      <logo class="max-w-[30%] lg:max-w-[50%]" />
+      <logo class="lg:h-[100px] lg:w-[84px]" />
     </RouterLink>
     <button
       class="relative z-10 flex h-3 w-6 flex-col justify-between lg:hidden *:block *:ease *:h-[2px] *:w-full *:transform *:rounded-full *:bg-white *:transition *:duration-300"
@@ -28,7 +28,7 @@ function closeMenu() {
     </button>
   
     <nav
-        class="text-center place-items-center text-3xl invisible opacity-0 flex-1 py-12 flex justify-between mt-24 pt-24 flex-col fixed z-10 inset-0 bg-black lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
+        class="text-center place-items-center text-3xl invisible opacity-0 py-12 flex justify-between mt-24 pt-24 flex-col fixed z-10 inset-0 bg-black lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
         :class="{ '!visible !opacity-100': activeMenu }"
         v-scroll-lock="activeMenu"
       >

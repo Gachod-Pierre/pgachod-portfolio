@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
-import VScrollLock from 'v-scroll-lock'
+import V3ScrollLock from 'v3-scroll-lock'
 import Vue3Marquee from 'vue3-marquee'
 
 const app = createApp(App)
@@ -15,7 +15,7 @@ app.use(createRouter({
   routes : routes
 }))
 
-app.use(VScrollLock, {})
+app.use(V3ScrollLock, {})
 app.use(Vue3Marquee)
 
 app.mount('#app')
