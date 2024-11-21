@@ -199,6 +199,14 @@ onMounted(() => {
     generateRandomPositions(sectionWidth, sectionHeight, iconSize)
   }
 
+  const updateSectionHeight = () => {
+    const vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+  }
+
+  window.addEventListener('resize', updateSectionHeight)
+  updateSectionHeight()
+
   window.addEventListener('mousemove', onDrag)
   window.addEventListener('mouseup', stopDrag)
   window.addEventListener('touchmove', onDrag, { passive: false })
@@ -210,6 +218,7 @@ onUnmounted(() => {
   window.removeEventListener('mouseup', stopDrag)
   window.removeEventListener('touchmove', onDrag)
   window.removeEventListener('touchend', stopDrag)
+  window.removeEventListener('resize', updateSectionHeight)
 })
 </script>
 
@@ -272,13 +281,13 @@ onUnmounted(() => {
       </div>
       <div class="w-full pb-11 border-b border-white flex justify-center items-center bg-black">
         <Vue3Marquee :pause-on-hover="true" :loop="0" class="w-full h-fit overflow-hidden">
-          <p class="lg:text-9xl text-xl font-extrabold text-left text-white h-fit">
+          <p class="lg:text-9xl text-9xl font-extrabold text-left text-white h-fit">
             WEB DEVELOPER
-            <span class="h-fit lg:text-9xl text-xl font-thin text-left text-white"
+            <span class="h-fit lg:text-9xl text-9xl font-thin text-left text-white"
               >SEARCH ENGINE OPTIMISING</span
             >
             DESIGNER
-            <span class="h-fit lg:text-9xl text-xl font-light text-left text-white"
+            <span class="h-fit lg:text-9xl text-9xl font-light text-left text-white"
               >PROJECT MANAGEMENT</span
             >
           </p>
@@ -289,11 +298,11 @@ onUnmounted(() => {
     <!-- Section Skills -->
     <section
       ref="sectionRef"
-      class="snap-start flex flex-col bg-black relative w-full h-screen"
+      class="snap-start flex flex-col bg-black relative w-full"
     >
       <div class="flex justify-between items-center">
         <h2 class="title1 my-6 border-b border-white w-fit">Skills</h2>
-        <iconClic/>
+        <iconClic />
       </div>
       <div class="relative w-full h-full grid-background">
         <div v-for="skill in skills" :key="skill.id">
@@ -325,7 +334,7 @@ onUnmounted(() => {
     </section>
     <!-- Section 3 -->
     <section
-      class="snap-start flex flex-col justify-center items-center w-full h-screen bg-gray-700 text-white"
+      class="snap-start flex flex-col justify-center items-center w-full bg-gray-700 text-white"
     >
       <h2 class="text-4xl lg:text-6xl font-bold">Section Supplémentaire</h2>
       <p class="text-xl lg:text-2xl mt-4 max-w-3xl text-center">
@@ -339,12 +348,12 @@ onUnmounted(() => {
 .snap-container {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 section {
   scroll-snap-align: start;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   display: flex;
   flex-direction: column;
   padding-top: 30px;
@@ -352,20 +361,12 @@ section {
 }
 
 @media (max-width: 768px) {
-  /* Ajustez cette valeur selon vos besoins */
   section {
-    scroll-snap-align: start;
-    height: calc(100vh - 96px);
-    display: flex;
-    flex-direction: column;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    height: calc(var(--vh, 1vh) * 100 - 96px);
   }
 
   .snap-container {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: calc(100vh - 96px);
+    height: calc(var(--vh, 1vh) * 100 - 96px);
   }
 }
 
@@ -401,13 +402,13 @@ body.no-select {
   50%,
   70%,
   90% {
-    transform: rotate(-2deg);
+    transform: rotate(-1deg);
   }
   20%,
   40%,
   60%,
   80% {
-    transform: rotate(2deg);
+    transform: rotate(1deg);
   }
 }
 
@@ -425,4 +426,3 @@ body.no-select {
   background-size: 20px 20px; /* Taille des carreaux */
 }
 </style>
-0.5

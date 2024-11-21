@@ -148,6 +148,16 @@ body {
   overflow-x: hidden; /* Empêche le scroll horizontal */
 }
 
+@media (max-width: 768px) {
+  body {
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: #000;
+    cursor: none !important;
+    overflow-x: hidden; /* Empêche le scroll horizontal */
+  }
+}
+
 html {
   cursor: none !important;
   scroll-behavior: smooth; /* Défilement fluide */
@@ -161,8 +171,6 @@ a,
 button {
   cursor: none;
 }
-
-
 
 @media (min-width: 1024px) {
   .custom-cursor {
