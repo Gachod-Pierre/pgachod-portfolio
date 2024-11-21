@@ -17,6 +17,7 @@ import IconPhotoshop from '@/components/icons/iconPhotoshop.vue'
 import IconPython from '@/components/icons/iconPython.vue'
 import IconVue from '@/components/icons/iconVue.vue'
 import iconClic from '@/components/icons/iconClic.vue'
+import LoadingSpinner from '@/components/LoadingSpinner.vue'
 
 interface Skill {
   id: number
@@ -167,7 +168,9 @@ async function loadProjectImages() {
     images.value = projects
       .map((project) => {
         const image = project.imageProjet?.[0]
-        return image ? pb.getFileUrl(project, image) : null
+        const imageUrl = image ? pb.getFileUrl(project, image) : null
+        console.log('Image URL:', imageUrl) // Log des URL des images
+        return imageUrl
       })
       .filter((imageUrl): imageUrl is string => imageUrl !== null)
   } catch (error) {
@@ -177,7 +180,14 @@ async function loadProjectImages() {
 
 const elementHeight = ref(0)
 
+const updateSectionHeight = () => {
+  const vh = window.innerHeight * 0.01
+  document.documentElement.style.setProperty('--vh', `${vh}px`)
+}
+
 onMounted(() => {
+  loadProjectImages()
+
   const element = document.querySelector('.title1.my-6')
   if (element) {
     const rect = element.getBoundingClientRect()
@@ -190,18 +200,11 @@ onMounted(() => {
     elementHeight.value = rect.height + marginTop + marginBottom + paddingTop + paddingBottom + 30
   }
 
-  loadProjectImages()
-
   const sectionElement = sectionRef.value
   if (sectionElement) {
     const { offsetWidth: sectionWidth, offsetHeight: sectionHeight } = sectionElement
     const iconSize = window.innerWidth >= 1024 ? 128 : 80
     generateRandomPositions(sectionWidth, sectionHeight, iconSize)
-  }
-
-  const updateSectionHeight = () => {
-    const vh = window.innerHeight * 0.01
-    document.documentElement.style.setProperty('--vh', `${vh}px`)
   }
 
   window.addEventListener('resize', updateSectionHeight)
@@ -268,16 +271,27 @@ onUnmounted(() => {
             </p>
           </div>
         </div>
-        <Carousel class="max-h-fit items-center flex" v-bind="config">
-          <Slide v-for="(image, index) in images" :key="index">
-            <div class="carousel__item h-full w-full">
-              <img :src="image" :alt="'Slide ' + (index + 1)" class="w-full h-full object-cover" />
-            </div>
-          </Slide>
-          <template #addons>
-            <Navigation />
+        <Suspense>
+          <template #default>
+            <Carousel class="max-h-fit items-center flex" v-bind="config">
+              <Slide v-for="(image, index) in images" :key="index">
+                <div class="carousel__item h-full w-full">
+                  <img
+                    :src="image"
+                    :alt="'Slide ' + (index + 1)"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              </Slide>
+              <template #addons>
+                <Navigation />
+              </template>
+            </Carousel>
           </template>
-        </Carousel>
+          <template #fallback>
+            <LoadingSpinner />
+          </template>
+        </Suspense>
       </div>
       <div class="w-full pb-11 border-b border-white flex justify-center items-center bg-black">
         <Vue3Marquee :pause-on-hover="true" :loop="0" class="w-full h-fit overflow-hidden">
@@ -298,13 +312,13 @@ onUnmounted(() => {
     <!-- Section Skills -->
     <section
       ref="sectionRef"
-      class="snap-start flex flex-col bg-black relative w-full"
+      class="snap-start flex flex-col bg-black relative w-full grid-background"
     >
       <div class="flex justify-between items-center">
         <h2 class="title1 my-6 border-b border-white w-fit">Skills</h2>
         <iconClic />
       </div>
-      <div class="relative w-full h-full grid-background">
+      <div class="relative w-full h-full">
         <div v-for="skill in skills" :key="skill.id">
           <div
             :style="{
