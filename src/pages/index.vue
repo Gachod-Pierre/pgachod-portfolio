@@ -30,11 +30,12 @@ interface Skill {
   initialY?: number
 }
 
-const config = {
+const config = reactive({
   autoplay: 2200,
   wrapAround: true,
-  pauseAutoplayOnHover: true
-}
+  pauseAutoplayOnHover: true,
+  autoplayEnabled: false
+})
 
 const skills = reactive<Skill[]>([
   { id: 1, name: 'HTML', icon: markRaw(IconHtml), x: 0, y: 0, visible: false },
@@ -57,7 +58,6 @@ const lastTouchPosition = ref<{ x: number; y: number } | null>(null)
 
 const generateRandomPositions = (width: number, height: number, size: number) => {
   const positions: { x: number; y: number }[] = []
-  const margin = size * 1.5
 
   skills.forEach((skill) => {
     let x: number, y: number
@@ -173,6 +173,7 @@ async function loadProjectImages() {
         return imageUrl
       })
       .filter((imageUrl): imageUrl is string => imageUrl !== null)
+    config.autoplayEnabled = true
   } catch (error) {
     console.error('Erreur lors du chargement des images de projets:', error)
   }
@@ -187,6 +188,7 @@ const updateSectionHeight = () => {
 
 onMounted(() => {
   loadProjectImages()
+
 
   const element = document.querySelector('.title1.my-6')
   if (element) {
@@ -271,27 +273,22 @@ onUnmounted(() => {
             </p>
           </div>
         </div>
-        <Suspense>
-          <template #default>
-            <Carousel class="max-h-fit items-center flex" v-bind="config">
-              <Slide v-for="(image, index) in images" :key="index">
-                <div class="carousel__item h-full w-full">
-                  <img
-                    :src="image"
-                    :alt="'Slide ' + (index + 1)"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-              </Slide>
-              <template #addons>
-                <Navigation />
-              </template>
-            </Carousel>
+        <Carousel
+          v-if="config.autoplayEnabled"
+          ref="myCarrousel"
+          class="max-h-fit items-center flex"
+          v-bind="config"
+        >
+          <Slide v-for="(image, index) in images" :key="index">
+            <div class="carousel__item h-full w-full">
+              <img :src="image" :alt="'Slide ' + (index + 1)" class="w-full h-full object-cover" />
+            </div>
+          </Slide>
+          <template #addons>
+            <Navigation />
           </template>
-          <template #fallback>
-            <LoadingSpinner />
-          </template>
-        </Suspense>
+        </Carousel>
+        <LoadingSpinner v-else />
       </div>
       <div class="w-full pb-11 border-b border-white flex justify-center items-center bg-black">
         <Vue3Marquee :pause-on-hover="true" :loop="0" class="w-full h-fit overflow-hidden">
