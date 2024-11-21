@@ -181,10 +181,6 @@ async function loadProjectImages() {
 
 const elementHeight = ref(0)
 
-const updateSectionHeight = () => {
-  const vh = window.innerHeight * 0.01
-  document.documentElement.style.setProperty('--vh', `${vh}px`)
-}
 
 onMounted(() => {
   loadProjectImages()
@@ -209,8 +205,6 @@ onMounted(() => {
     generateRandomPositions(sectionWidth, sectionHeight, iconSize)
   }
 
-  window.addEventListener('resize', updateSectionHeight)
-  updateSectionHeight()
 
   window.addEventListener('mousemove', onDrag)
   window.addEventListener('mouseup', stopDrag)
@@ -223,7 +217,6 @@ onUnmounted(() => {
   window.removeEventListener('mouseup', stopDrag)
   window.removeEventListener('touchmove', onDrag)
   window.removeEventListener('touchend', stopDrag)
-  window.removeEventListener('resize', updateSectionHeight)
 })
 </script>
 
@@ -292,13 +285,13 @@ onUnmounted(() => {
       </div>
       <div class="w-full pb-11 border-b border-white flex justify-center items-center bg-black">
         <Vue3Marquee :pause-on-hover="true" :loop="0" class="w-full h-fit overflow-hidden">
-          <p class="lg:text-9xl text-9xl font-extrabold text-left text-white h-fit">
+          <p class="lg:text-9xl text-4xl font-extrabold text-left text-white h-fit">
             WEB DEVELOPER
-            <span class="h-fit lg:text-9xl text-9xl font-thin text-left text-white"
+            <span class="h-fit lg:text-9xl text-4xl font-thin text-left text-white"
               >SEARCH ENGINE OPTIMISING</span
             >
             DESIGNER
-            <span class="h-fit lg:text-9xl text-9xl font-light text-left text-white"
+            <span class="h-fit lg:text-9xl text-4xl font-light text-left text-white"
               >PROJECT MANAGEMENT</span
             >
           </p>
@@ -359,12 +352,12 @@ onUnmounted(() => {
 .snap-container {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
 }
 
 section {
   scroll-snap-align: start;
-  height: calc(var(--vh, 1vh) * 100);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   padding-top: 30px;
@@ -373,11 +366,11 @@ section {
 
 @media (max-width: 768px) {
   section {
-    height: calc(var(--vh, 1vh) * 100 - 96px);
+    height: calc(100vh - 96px);
   }
 
   .snap-container {
-    height: calc(var(--vh, 1vh) * 100 - 96px);
+    height: calc(100vh - 96px);
   }
 }
 
