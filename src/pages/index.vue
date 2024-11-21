@@ -187,7 +187,7 @@ onMounted(() => {
     const paddingTop = parseFloat(style.paddingTop)
     const paddingBottom = parseFloat(style.paddingBottom)
 
-    elementHeight.value = rect.height + marginTop + marginBottom + paddingTop + paddingBottom
+    elementHeight.value = rect.height + marginTop + marginBottom + paddingTop + paddingBottom + 30
   }
 
   loadProjectImages()
@@ -215,6 +215,17 @@ onUnmounted(() => {
 
 <template>
   <div class="snap-container">
+    <!-- Définir le filtre SVG pour la lueur -->
+    <svg width="0" height="0">
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
+        <feMerge>
+          <feMergeNode in="coloredBlur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </svg>
+
     <!-- Section 1 : Carrousel -->
     <section
       class="snap-start flex flex-col justify-between items-center w-full bg-black text-white"
@@ -259,17 +270,15 @@ onUnmounted(() => {
           </template>
         </Carousel>
       </div>
-      <div
-        class="w-full pb-11 border-b border-white flex justify-center items-center bg-black"
-      >
-        <Vue3Marquee :pause-on-hover="true" :loop="0" class="w-full">
-          <p class="lg:text-9xl text-xl font-extrabold text-left text-white">
+      <div class="w-full pb-11 border-b border-white flex justify-center items-center bg-black">
+        <Vue3Marquee :pause-on-hover="true" :loop="0" class="w-full h-fit overflow-hidden">
+          <p class="lg:text-9xl text-xl font-extrabold text-left text-white h-fit">
             WEB DEVELOPER
-            <span class="lg:text-9xl text-xl font-thin text-left text-white"
+            <span class="h-fit lg:text-9xl text-xl font-thin text-left text-white"
               >SEARCH ENGINE OPTIMISING</span
             >
             DESIGNER
-            <span class="lg:text-9xl text-xl font-light text-left text-white"
+            <span class="h-fit lg:text-9xl text-xl font-light text-left text-white"
               >PROJECT MANAGEMENT</span
             >
           </p>
@@ -284,9 +293,9 @@ onUnmounted(() => {
     >
       <div class="flex justify-between items-center">
         <h2 class="title1 my-6 border-b border-white w-fit">Skills</h2>
-        <iconClic/>
+        <iconClic />
       </div>
-      <div class="relative w-full h-full">
+      <div class="relative w-full h-full grid-background">
         <div v-for="skill in skills" :key="skill.id">
           <div
             :style="{
@@ -302,7 +311,14 @@ onUnmounted(() => {
             @mousedown="startDrag(skill.id, $event)"
             @touchstart="startDrag(skill.id, $event)"
           >
-            <component :is="skill.icon" class="w-20 h-20 lg:w-32 lg:h-32" :title="skill.name" />
+            <div
+              :class="{
+                'icon-glow': skill.visible,
+                shake: isDragging && activeSkillId === skill.id
+              }"
+            >
+              <component :is="skill.icon" class="w-20 h-20 lg:w-32 lg:h-32" :title="skill.name" />
+            </div>
           </div>
         </div>
       </div>
@@ -359,21 +375,48 @@ body.no-select {
   -ms-user-select: none;
 }
 
-.mobile-marquee {
-  display: none;
+@keyframes breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+  }
 }
 
-.desktop-marquee {
-  display: block;
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: rotate(-2deg);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: rotate(2deg);
+  }
 }
 
-@media (max-width: 768px) {
-  .mobile-marquee {
-    display: block;
-  }
+.icon-glow {
+  animation: breathe 2s infinite;
+}
 
-  .desktop-marquee {
-    display: none;
-  }
+.shake {
+  animation: shake 1s infinite;
+}
+
+.grid-background {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 0.5px, transparent 0.5px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0.5px, transparent 0.5px);
+  background-size: 20px 20px; /* Taille des carreaux */
 }
 </style>
+0.5

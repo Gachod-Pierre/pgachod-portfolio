@@ -13,7 +13,7 @@ function closeMenu() {
 </script>
 <template>
   <header
-    class="flex items-center justify-between py-12 gap-24 bg-transparent h-20 lg:w-[300px] lg:h-[100vh] lg:fixed lg:top-0 lg:right-0 lg:shadow-nav lg:overflow-hidden lg:px-[50px] lg:py-[30px] lg:flex-col lg:gap-6 lg:items-center lg:bg-neutral-900 lg:flex"
+    class="flex items-center justify-between py-12 gap-24 bg-transparent h-20 lg:w-[300px] lg:h-[100vh] lg:fixed lg:top-0 lg:right-0 lg:shadow-nav lg:overflow-hidden lg:px-[50px] lg:py-[50px] lg:flex-col lg:gap-6 lg:items-center lg:bg-neutral-900 lg:flex"
     :class="{ '!bg-black': activeMenu }"
   >
     <RouterLink to="/" @click="closeMenu" class="flex justify-center items-center">
@@ -26,50 +26,50 @@ function closeMenu() {
       <span :class="{ 'translate-y-[5px] rotate-45': activeMenu }"></span>
       <span :class="{ '-translate-y-[5px] -rotate-45': activeMenu }"></span>
     </button>
-  
+
     <nav
-        class="text-center place-items-center text-3xl invisible opacity-0 py-12 flex justify-between mt-24 pt-24 flex-col fixed z-10 inset-0 bg-black lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
-        :class="{ '!visible !opacity-100': activeMenu }"
-        v-scroll-lock="activeMenu"
-      >
-        <ul class="flex flex-col gap-4 lg:border-l lg:px-6 lg:border-white lg:flex-col">
-          <li>
-            <RouterLink
-              class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white"
-              to="/"
-              @click="closeMenu"
-            >
-              <span :class="{ 'text-slate-300': $route.path === '/' }">About Me</span>
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink
-              class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white"
-              to="/"
-              @click="closeMenu"
-            >
-              <span :class="{ 'text-slate-300': $route.path === '/' }">My projects</span>
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink
-              class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white"
-              to="/oeuvres"
-              @click="closeMenu"
-            >
-              <span :class="{ 'text-slate-300': $route.path === '/' }">Contact Me</span>
-            </RouterLink>
-          </li>
-        </ul>
-      </nav>
+      class="text-center gap-[16vh] place-items-center text-3xl invisible opacity-0 py-32 flex justify-between mt-24 pt-24 flex-col fixed z-10 inset-0 bg-black lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
+      :class="{ '!visible !opacity-100': activeMenu }"
+      v-scroll-lock="activeMenu"
+    >
+      <ul class="flex flex-col gap-4 lg:border-l lg:px-6 lg:border-white lg:flex-col">
+        <li>
+          <RouterLink
+            class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white"
+            to="/"
+            @click="closeMenu"
+          >
+            <span :class="{ 'text-slate-300': $route.path === '/' }">My projects</span>
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink
+            class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white"
+            to="/"
+            @click="closeMenu"
+          >
+            <span :class="{ 'text-slate-300': $route.path === '/' }">Contact Me</span>
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink
+            class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white"
+            to="/"
+            @click="closeMenu"
+          >
+            <span :class="{ 'text-slate-300': $route.path === '/' }">CV</span>
+          </RouterLink>
+        </li>
+      </ul>
       <Button
-        class="hover:bg-purple-500 hidden lg:flex"
+        class="hover:bg-purple-500 flex"
         text="Connection"
         variant="github"
         size="small"
         url="/"
         :icon="GithubLogo"
       />
+    </nav>
   </header>
 </template>
 
