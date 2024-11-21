@@ -28,7 +28,7 @@ function closeMenu() {
     </button>
 
     <nav
-      class="text-center gap-[16vh] place-items-center text-3xl invisible opacity-0 py-32 flex justify-between mt-24 pt-24 flex-col fixed z-10 inset-0 bg-black lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
+      class="text-center gap-[16vh] place-items-center text-3xl invisible opacity-0 py-20 flex justify-between mt-24 pt-24 flex-col fixed z-10 inset-0 bg-black lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
       :class="{ '!visible !opacity-100': activeMenu }"
       v-scroll-lock="activeMenu"
     >
@@ -62,7 +62,7 @@ function closeMenu() {
         </li>
       </ul>
       <Button
-        class="hover:bg-purple-500 flex"
+        class="hover:bg-purple-500 w-fit h-fit flex"
         text="Connection"
         variant="github"
         size="small"

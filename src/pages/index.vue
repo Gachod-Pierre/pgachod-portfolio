@@ -289,11 +289,11 @@ onUnmounted(() => {
     <!-- Section Skills -->
     <section
       ref="sectionRef"
-      class="z-50 snap-start flex flex-col bg-black relative w-full h-screen"
+      class="snap-start flex flex-col bg-black relative w-full h-screen"
     >
       <div class="flex justify-between items-center">
         <h2 class="title1 my-6 border-b border-white w-fit">Skills</h2>
-        <iconClic />
+        <iconClic/>
       </div>
       <div class="relative w-full h-full grid-background">
         <div v-for="skill in skills" :key="skill.id">
@@ -360,6 +360,12 @@ section {
     flex-direction: column;
     padding-top: 30px;
     padding-bottom: 30px;
+  }
+
+  .snap-container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: calc(100vh - 96px);
   }
 }
 

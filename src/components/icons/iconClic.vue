@@ -2,6 +2,7 @@
   <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
   <div>
     <svg
+      class="icon"
       width="100"
       height="98"
       viewBox="0 0 120 118"
@@ -116,4 +117,19 @@
 .fade-out {
   animation: fadeOut 3s both infinite;
 }
+
+.icon {
+  width: 100px;
+  height: 98px;
+}
+
+
+@media (max-width: 768px) {
+  .icon {
+    width: 70px;
+    height: 69px;
+  }
+}
+
 </style>
+
