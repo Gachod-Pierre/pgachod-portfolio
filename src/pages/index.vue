@@ -245,7 +245,7 @@ onUnmounted(() => {
       class="snap-start flex flex-col justify-between items-center w-full bg-black text-white"
     >
       <div
-        class="flex flex-col justify-between md:flex-row max-w-full max-h-full lg:justify-start lg:items-center self-stretch relative md:gap-[76px] overflow-hidden"
+        class="flex flex-col justify-between lg:flex-row max-w-full max-h-full lg:justify-start lg:items-center self-stretch relative md:gap-[76px] overflow-hidden"
       >
         <div
           class="flex flex-col justify-start items-start flex-grow relative gap-10 lg:gap-[88px]"
@@ -309,13 +309,13 @@ onUnmounted(() => {
     <!-- Section Skills -->
     <section
       ref="sectionRef"
-      class="snap-start flex flex-col bg-black relative w-full grid-background"
+      class="snap-start flex flex-col bg-black relative w-full"
     >
       <div class="flex justify-between items-center">
         <h2 class="title1 my-6 border-b border-white w-fit">Skills</h2>
         <iconClic />
       </div>
-      <div class="relative w-full h-full">
+      <div class="relative w-full h-full grid-background">
         <div v-for="skill in skills" :key="skill.id">
           <div
             :style="{
