@@ -39,25 +39,34 @@ function closeMenu() {
             to="/"
             @click="closeMenu"
           >
-            <span :class="{ 'text-slate-300': $route.path === '/' }">My projects</span>
+            <span :class="{ 'text-purple-500': $route.path === '/' }">Home</span>
           </RouterLink>
         </li>
         <li>
           <RouterLink
             class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white"
-            to="/"
+            to="/projects"
             @click="closeMenu"
           >
-            <span :class="{ 'text-slate-300': $route.path === '/' }">Contact Me</span>
+            <span :class="{ 'text-purple-500': $route.path === '/projects' }">My projects</span>
           </RouterLink>
         </li>
         <li>
           <RouterLink
             class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white"
-            to="/"
+            to="/contact"
             @click="closeMenu"
           >
-            <span :class="{ 'text-slate-300': $route.path === '/' }">CV</span>
+            <span :class="{ 'text-purple-500': $route.path === '/contact' }">Contact Me</span>
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink
+            class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white"
+            to="/CV"
+            @click="closeMenu"
+          >
+            <span :class="{ 'text-purple-500': $route.path === '/CV' }">CV</span>
           </RouterLink>
         </li>
       </ul>
