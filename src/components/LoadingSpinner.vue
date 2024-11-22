@@ -13,6 +13,7 @@ import Logo from './icons/logo.vue'
 
 <style scoped>
 .spinner-container {
+  background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;

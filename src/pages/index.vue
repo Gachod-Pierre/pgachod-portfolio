@@ -181,10 +181,8 @@ async function loadProjectImages() {
 
 const elementHeight = ref(0)
 
-
 onMounted(() => {
   loadProjectImages()
-
 
   const element = document.querySelector('.title1.my-6')
   if (element) {
@@ -204,7 +202,6 @@ onMounted(() => {
     const iconSize = window.innerWidth >= 1024 ? 128 : 80
     generateRandomPositions(sectionWidth, sectionHeight, iconSize)
   }
-
 
   window.addEventListener('mousemove', onDrag)
   window.addEventListener('mouseup', stopDrag)
@@ -273,7 +270,7 @@ onUnmounted(() => {
           v-bind="config"
         >
           <Slide v-for="(image, index) in images" :key="index">
-            <div class="carousel__item h-full w-full">
+            <div class="carousel__item h-full w-fit px-1">
               <img :src="image" :alt="'Slide ' + (index + 1)" class="w-full h-full object-cover" />
             </div>
           </Slide>
@@ -300,10 +297,7 @@ onUnmounted(() => {
     </section>
 
     <!-- Section Skills -->
-    <section
-      ref="sectionRef"
-      class="snap-start flex flex-col bg-black relative w-full"
-    >
+    <section ref="sectionRef" class="snap-start flex flex-col bg-black relative w-full">
       <div class="flex justify-between items-center">
         <h2 class="title1 my-6 border-b border-white w-fit">Skills</h2>
         <iconClic />
@@ -337,14 +331,7 @@ onUnmounted(() => {
       </div>
     </section>
     <!-- Section 3 -->
-    <section
-      class="snap-start flex flex-col justify-center items-center w-full bg-gray-700 text-white"
-    >
-      <h2 class="text-4xl lg:text-6xl font-bold">Section Supplémentaire</h2>
-      <p class="text-xl lg:text-2xl mt-4 max-w-3xl text-center">
-        Une section supplémentaire pour illustrer le comportement de snapping.
-      </p>
-    </section>
+    
   </div>
 </template>
 
