@@ -18,25 +18,32 @@ export function initCustomCursor() {
     cursor.style.display = 'block'
   }
 
-
+  let mouseX = 0
+  let mouseY = 0
 
   // Suivi de la position de la souris et gestion du curseur personnalisé
   document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX
+    mouseY = e.clientY
+    updateCursorPosition()
+    showCursor() // Afficher le curseur personnalisé
+  })
+
+  // Mettre à jour la position du curseur
+  function updateCursorPosition() {
     const cursorRect = cursor.getBoundingClientRect()
     const cursorSize = cursorRect.width
 
     // Empêcher le curseur de dépasser les bords de l'écran
-    const x = Math.max(0, Math.min(e.pageX - cursorSize / 2, window.innerWidth - cursorSize))
-    const y = Math.max(0, Math.min(e.pageY - cursorSize / 2, window.innerHeight - cursorSize))
+    const x = Math.max(0, Math.min(mouseX - cursorSize / 2, window.innerWidth - cursorSize))
+    const y = Math.max(0, Math.min(mouseY - cursorSize / 2, window.innerHeight - cursorSize))
 
-    cursor.style.top = `${y}px`
-    cursor.style.left = `${x}px`
+    cursor.style.top = `${y + window.scrollY}px`
+    cursor.style.left = `${x + window.scrollX}px`
+  }
 
-    // Toujours cacher le curseur natif
-    document.body.style.cursor = 'none'
-
-    showCursor() // Afficher le curseur personnalisé
-  })
+  // Mettre à jour la position du curseur lors du défilement
+  window.addEventListener('scroll', updateCursorPosition)
 
   // Cacher le curseur lorsque la souris sort de la fenêtre
   document.addEventListener('mouseleave', () => {
