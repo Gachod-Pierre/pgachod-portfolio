@@ -18,6 +18,7 @@ import IconPython from '@/components/icons/iconPython.vue'
 import IconVue from '@/components/icons/iconVue.vue'
 import iconClic from '@/components/icons/iconClic.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
+import { RouterLink } from 'vue-router'
 
 interface Skill {
   id: number
@@ -215,6 +216,13 @@ onUnmounted(() => {
   window.removeEventListener('touchmove', onDrag)
   window.removeEventListener('touchend', stopDrag)
 })
+
+function scrollToSection() {
+  const section = document.getElementById('section2')
+  if (section) {
+    section.scrollIntoView({ behavior: 'smooth' })
+  }
+}
 </script>
 
 <template>
@@ -235,7 +243,7 @@ onUnmounted(() => {
       class="snap-start flex flex-col justify-between items-center w-full bg-black text-white"
     >
       <div
-        class="flex flex-col justify-between lg:flex-row max-w-full max-h-full lg:justify-start lg:items-center self-stretch relative md:gap-[76px] overflow-hidden"
+        class="flex flex-col justify-between car-lg:flex-row max-w-full max-h-full lg:justify-start self-stretch relative md:gap-[76px] overflow-hidden"
       >
         <div
           class="flex flex-col justify-start items-start flex-grow relative gap-10 lg:gap-[88px]"
@@ -244,7 +252,10 @@ onUnmounted(() => {
             <span class="self-stretch title2">Pierre</span><br />
             <span class="self-stretch title1">Gachod</span>
           </h1>
-          <div class="flex justify-start items-center self-stretch relative gap-[15px]">
+          <div
+            @click="scrollToSection"
+            class="flex justify-start items-center self-stretch relative gap-[15px]"
+          >
             <svg
               width="25"
               height="16"
@@ -280,24 +291,24 @@ onUnmounted(() => {
         </Carousel>
         <LoadingSpinner v-else />
       </div>
-      <div class="w-full pb-11 border-b border-white flex justify-center items-center bg-black">
-        <Vue3Marquee :pause-on-hover="true" :loop="0" class="w-full h-fit overflow-hidden">
-          <p class="lg:text-9xl text-4xl font-extrabold text-left text-white h-fit">
+      <div class="w-full border-b border-white flex justify-center items-center bg-black flex-grow">
+        <Vue3Marquee :pause-on-hover="true" :loop="0" class="flex-grow overflow-hidden">
+          <p class="text-[20vh] font-extrabold text-left text-white">
             WEB DEVELOPER
-            <span class="h-fit lg:text-9xl text-4xl font-thin text-left text-white"
-              >SEARCH ENGINE OPTIMISING</span
-            >
+            <span class="text-[20vh] font-thin text-left text-white">SEARCH ENGINE OPTIMISING</span>
             DESIGNER
-            <span class="h-fit lg:text-9xl text-4xl font-light text-left text-white"
-              >PROJECT MANAGEMENT</span
-            >
+            <span class="font-light text-left text-white">PROJECT MANAGEMENT</span>
           </p>
         </Vue3Marquee>
       </div>
     </section>
 
     <!-- Section Skills -->
-    <section ref="sectionRef" class="snap-start flex flex-col bg-black relative w-full">
+    <section
+      id="section2"
+      ref="sectionRef"
+      class="snap-start flex flex-col bg-black relative w-full"
+    >
       <div class="flex justify-between items-center">
         <h2 class="title1 my-6 border-b border-white w-fit">Skills</h2>
         <iconClic />
@@ -331,7 +342,6 @@ onUnmounted(() => {
       </div>
     </section>
     <!-- Section 3 -->
-    
   </div>
 </template>
 
@@ -412,8 +422,8 @@ body.no-select {
 }
 
 .grid-background {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 0.5px, transparent 0.5px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0.5px, transparent 0.5px);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 20px 20px; /* Taille des carreaux */
 }
 </style>
