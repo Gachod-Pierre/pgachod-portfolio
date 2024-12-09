@@ -8,7 +8,7 @@ const AsyncPgcv = defineAsyncComponent(() => import('@/components/icons/pgcv.vue
 <template>
   <Suspense>
     <template #default>
-      <AsyncPgcv class="w-full h-full" />
+      <AsyncPgcv/>
     </template>
     <template #fallback>
       <div class="loading-container">
@@ -34,4 +34,5 @@ const AsyncPgcv = defineAsyncComponent(() => import('@/components/icons/pgcv.vue
     transform: translate(-50%, -50%);
   }
 }
+
 </style>
