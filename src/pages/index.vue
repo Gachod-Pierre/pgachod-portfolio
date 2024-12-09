@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, reactive, type Component } from 'vue'
+import { ref, onMounted, onUnmounted, reactive, type Component, computed } from 'vue'
 import { pb } from '@/backend'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import { useIntersectionObserver } from '@vueuse/core'
 import { markRaw } from 'vue'
+import ImgPb from '@/components/ImgPb.vue'
+import { defineProps } from 'vue'
 
 import IconHtml from '@/components/icons/iconHtml.vue'
 import IconCss from '@/components/icons/iconCss.vue'
@@ -18,7 +20,28 @@ import IconPython from '@/components/icons/iconPython.vue'
 import IconVue from '@/components/icons/iconVue.vue'
 import iconClic from '@/components/icons/iconClic.vue'
 import LoadingSpinner from '@/components/LoadingSpinner.vue'
+import IconGit from '@/components/icons/iconGit.vue'
+import IconIE from '@/components/icons/iconIE.vue'
+import IconNodeJS from '@/components/icons/iconNodeJS.vue'
+import IconPB from '@/components/icons/iconPB.vue'
+import IconTailwind from '@/components/icons/iconTailwind.vue'
+import IconTS from '@/components/icons/iconTS.vue'
+import IconWP from '@/components/icons/iconWP.vue'
 import { RouterLink } from 'vue-router'
+
+const props = defineProps<{
+  project: {
+    descriptionProjet: string
+    // autres propriétés du projet
+  }
+}>()
+
+function truncateText(text: string, wordLimit: number): string {
+  if (!text) return ''
+  const words = text.split(' ')
+  if (words.length <= wordLimit) return text
+  return words.slice(0, wordLimit).join(' ') + '...'
+}
 
 interface Skill {
   id: number
@@ -38,6 +61,11 @@ const config = reactive({
   autoplayEnabled: false
 })
 
+const config2 = reactive({
+  wrapAround: true,
+  autoplayEnabled: false
+})
+
 const skills = reactive<Skill[]>([
   { id: 1, name: 'HTML', icon: markRaw(IconHtml), x: 0, y: 0, visible: false },
   { id: 2, name: 'CSS', icon: markRaw(IconCss), x: 0, y: 0, visible: false },
@@ -48,7 +76,14 @@ const skills = reactive<Skill[]>([
   { id: 7, name: 'Figma', icon: markRaw(IconFigma), x: 0, y: 0, visible: false },
   { id: 8, name: 'Photoshop', icon: markRaw(IconPhotoshop), x: 0, y: 0, visible: false },
   { id: 9, name: 'Python', icon: markRaw(IconPython), x: 0, y: 0, visible: false },
-  { id: 10, name: 'Vue.js', icon: markRaw(IconVue), x: 0, y: 0, visible: false }
+  { id: 10, name: 'Vue.js', icon: markRaw(IconVue), x: 0, y: 0, visible: false },
+  { id: 11, name: 'Git', icon: markRaw(IconGit), x: 0, y: 0, visible: false },
+  { id: 12, name: 'IE', icon: markRaw(IconIE), x: 0, y: 0, visible: false },
+  { id: 13, name: 'Node Js', icon: markRaw(IconNodeJS), x: 0, y: 0, visible: false },
+  { id: 14, name: 'PocketBase', icon: markRaw(IconPB), x: 0, y: 0, visible: false },
+  { id: 15, name: 'Tailwind', icon: markRaw(IconTailwind), x: 0, y: 0, visible: false },
+  { id: 16, name: 'TypeScript', icon: markRaw(IconTS), x: 0, y: 0, visible: false },
+  { id: 17, name: 'Wordpress', icon: markRaw(IconWP), x: 0, y: 0, visible: false }
 ])
 
 const sectionVisible = ref(false)
@@ -163,9 +198,10 @@ useIntersectionObserver(
 
 const images = ref<string[]>([])
 
+const projects = await pb.collection('projets').getFullList()
+
 async function loadProjectImages() {
   try {
-    const projects = await pb.collection('projets').getFullList()
     images.value = projects
       .map((project) => {
         const image = project.imageProjet?.[0]
@@ -223,6 +259,10 @@ function scrollToSection() {
     section.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+const formattedDate = computed(() => {
+  return dateProjet ? dateProjet.split(' ')[0] : ''
+})
 </script>
 
 <template>
@@ -240,7 +280,7 @@ function scrollToSection() {
 
     <!-- Section 1 : Carrousel -->
     <section
-      class="snap-start flex flex-col justify-between items-center w-full bg-black text-white"
+      class="section-snap snap-start flex flex-col justify-between items-center w-full bg-black text-white"
     >
       <div
         class="flex flex-col justify-between car-lg:flex-row max-w-full max-h-full lg:justify-start self-stretch relative md:gap-[76px] overflow-hidden"
@@ -295,9 +335,9 @@ function scrollToSection() {
         <Vue3Marquee :pause-on-hover="true" :loop="0" class="flex-grow overflow-hidden">
           <p class="text-[20vh] font-extrabold text-left text-white">
             WEB DEVELOPER
-            <span class="text-[20vh] font-thin text-left text-white">SEARCH ENGINE OPTIMISING</span>
+            <span class="text-[20vh] font-thin text-left text-white">SEARCH ENGINE OPTIMISER</span>
             DESIGNER
-            <span class="font-light text-left text-white">PROJECT MANAGEMENT</span>
+            <span class="text-[20vh] font-light text-left text-white">PROJECT MANAGEMENT</span>
           </p>
         </Vue3Marquee>
       </div>
@@ -307,10 +347,13 @@ function scrollToSection() {
     <section
       id="section2"
       ref="sectionRef"
-      class="snap-start flex flex-col bg-black relative w-full"
+      class="section-snap snap-start flex flex-col bg-black relative w-full"
     >
       <div class="flex justify-between items-center">
-        <h2 class="title1 my-6 border-b border-white w-fit">Skills</h2>
+        <h2 class="title1 my-6 border-b flex gap-2 border-white w-fit">
+          <span class="title1">My</span>
+          <span class="title2">Skills</span>
+        </h2>
         <iconClic />
       </div>
       <div class="relative w-full h-full grid-background">
@@ -341,7 +384,89 @@ function scrollToSection() {
         </div>
       </div>
     </section>
+
     <!-- Section 3 -->
+
+    <section
+      class="section-snap snap-start flex flex-col justify-between items-center w-full bg-black text-white"
+    >
+      <h2 class="self-start flex gap-2 text-left border-b border-white w-fit">
+        <span class="title3">Lastest</span><br />
+        <span class="title4">projects</span>
+      </h2>
+      <Carousel
+        ref="myCarrousel"
+        class="h-full w-full flex items-center justify-center"
+        v-bind="config2"
+      >
+        <Slide class="px-20" v-for="project in projects" :key="project.id">
+          <RouterLink class="w-full h-fit" to="/"
+            ><!-- :to="`/equipes/${equipe.id}`" -->
+            <div class="grid grid-cols-4 grid-rows-8 gap-5 w-full h-fit">
+              <!-- Titre du  -->
+              <div
+                class="flex items-center border border-white col-span-2 col-start-1 row-span-2 row-start-1 rounded-3xl"
+              >
+                <p class="px-3">{{ project.nomProjet }}</p>
+              </div>
+              <!-- Catégorie du projet -->
+              <div
+                class="flex items-center justify-center border border-white col-span-2 col-start-3 row-span-1 row-start-1 rounded-3xl"
+              >
+                <p>{{ project.typeProjet }}</p>
+              </div>
+              <!-- Image du projet -->
+              <div
+                class="overflow-hidden border border-white col-span-2 h-auto row-span-5 rounded-3xl col-start-1 row-start-3"
+              >
+                <ImgPb
+                  v-if="project.imageProjet"
+                  :record="project"
+                  :filename="project.imageProjet[0]"
+                  width="full"
+                  height="full"
+                  class="object-contain h-full w-full"
+                />
+              </div>
+              <!-- Date -->
+              <div
+                class="flex items-center justify-center border border-white col-span-2 col-start-1 row-span-1 rounded-3xl row-start-8"
+              >
+                <p>{{ project.dateProjet ? project.dateProjet.split(' ')[0] : '' }}</p>
+              </div>
+              <!-- Description du projet -->
+              <div
+                class="flex items-center text-start border border-white col-span-2 row-span-5 rounded-3xl col-start-3 row-start-2"
+              >
+                <p class="px-3">
+                  {{ truncateText(project.descriptionProjet, 70) }}
+                </p>
+              </div>
+              <!-- Illus du projet -->
+              <div
+                class="flex items-center justify-center border border-white col-span-1 row-span-2 rounded-3xl col-start-3 row-start-7"
+              >
+                <p>illus</p>
+              </div>
+              <!-- see more -->
+              <div
+                class="flex items-center hover:bg-purple-500 justify-center border border-white col-span-1 row-span-2 rounded-3xl row-start-7 col-start-4"
+              >
+                <RouterLink
+                  class="hover:scale-105 ease-in-out duration-100 w-full h-full flex items-center justify-center"
+                  to="/"
+                >
+                  &lt;/see project&gt;</RouterLink
+                >
+              </div>
+            </div></RouterLink
+          >
+        </Slide>
+        <template #addons>
+          <Navigation />
+        </template>
+      </Carousel>
+    </section>
   </div>
 </template>
 
@@ -350,9 +475,10 @@ function scrollToSection() {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   height: 100vh;
+  scroll-behavior: smooth;
 }
 
-section {
+.section-snap {
   scroll-snap-align: start;
   height: 100vh;
   display: flex;
