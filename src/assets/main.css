@@ -107,6 +107,20 @@ div::-webkit-scrollbar {
     @apply text-white text-6xl leading-tight lg:text-9xl;
   }
 
+  .title3 {
+    font-family: 'CocoSharp', sans-serif;
+    font-weight: 200;
+    letter-spacing: 0.01em;
+    @apply text-white text-4xl leading-tight lg:text-8xl;
+  }
+
+  .title4 {
+    font-family: 'CocoSharp', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    @apply text-white text-4xl leading-tight lg:text-8xl;
+  }
+
   h1 {
     font-family: 'CocoSharp', sans-serif;
     font-weight: 800;
