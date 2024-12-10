@@ -265,3 +265,9 @@ button {
 .oscillate {
   animation: oscillation 1.5s ease-in-out infinite;
 }
+
+
+:root {
+  --vc-clr-primary: #7E22CE !important;
+  --vc-clr-secondary: #C786FF !important;
+}
