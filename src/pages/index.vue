@@ -329,7 +329,9 @@ function scrollToSection() {
         <LoadingSpinner v-else />
       </div>
       <Vue3Marquee :pause-on-hover="true" :loop="0" class="border-b flex-grow overflow-hidden">
-        <p class="flex-grow overflow-hidden text-[10vh] lg:text-[25vh] font-extrabold text-left text-white">
+        <p
+          class="flex-grow overflow-hidden text-[10vh] lg:text-[25vh] font-extrabold text-left text-white"
+        >
           WEB DEVELOPER
           <span class="text-[10vh] lg:text-[25vh] font-thin text-left text-white"
             >SEARCH ENGINE OPTIMISER</span
@@ -401,10 +403,10 @@ function scrollToSection() {
         <Slide class="lg:px-20" v-for="project in projects" :key="project.id">
           <RouterLink class="w-full h-fit" to="/"
             ><!-- :to="`/equipes/${equipe.id}`" -->
-            <div class="grid grid-cols-4 grid-rows-8 gap-5 w-full h-fit">
+            <div class="grid grid-cols-4 md:grid-cols-4 grid-rows-8 gap-5 w-full h-fit">
               <!-- Titre du projet -->
               <div
-                class="flex items-center font-tems-center border border-white col-span-2 col-start-1 row-span-2 row-start-1 rounded-3xl"
+                class="flex items-center font-tems-center border border-white col-span-4 md:col-span-2 col-start-1 row-span-2 row-start-1 rounded-3xl"
               >
                 <p class="px-3 titleProject2">
                   {{ project.nomProjet }} <span class="titleProject">project</span>
@@ -412,13 +414,13 @@ function scrollToSection() {
               </div>
               <!-- Catégorie du projet -->
               <div
-                class="flex items-center justify-center border border-white col-span-2 col-start-3 row-span-1 row-start-1 rounded-3xl"
+                class="flex items-center justify-center border border-white col-span-4 md:col-span-2 col-start-1 md:col-start-3 row-span-1 row-start-3 md:row-start-1 rounded-3xl"
               >
                 <p>{{ project.typeProjet }}</p>
               </div>
               <!-- Image du projet -->
               <div
-                class="overflow-hidden border border-white col-span-2 h-auto row-span-5 rounded-3xl col-start-1 row-start-3"
+                class="overflow-hidden border border-white col-span-4 md:col-span-2 h-auto row-span-5 rounded-3xl col-start-1 row-start-5 md:col-start-1 md:row-start-3"
               >
                 <ImgPb
                   v-if="project.imageProjet"
@@ -431,13 +433,13 @@ function scrollToSection() {
               </div>
               <!-- Date -->
               <div
-                class="flex items-center justify-center border border-white col-span-2 col-start-1 row-span-1 rounded-3xl row-start-8"
+                class="flex items-center justify-center border border-white col-span-4 md:col-span-2 col-start-1 row-span-1 rounded-3xl row-start-10 md:row-start-8"
               >
                 <p>{{ project.dateProjet ? project.dateProjet.split(' ')[0] : '' }}</p>
               </div>
               <!-- Description du projet -->
               <div
-                class="flex items-center text-start border border-white col-span-2 row-span-5 rounded-3xl col-start-3 row-start-2"
+                class="flex items-center text-start border border-white col-span-4 md:col-span-2 row-span-5 rounded-3xl col-start-1 md:col-start-3 row-start-12 md:row-start-2"
               >
                 <p class="px-3">
                   {{ truncateText(project.descriptionProjet, 70) }}
@@ -445,13 +447,13 @@ function scrollToSection() {
               </div>
               <!-- Illus du projet -->
               <div
-                class="flex items-center justify-center border border-white col-span-1 row-span-2 rounded-3xl col-start-3 row-start-7"
+                class="flex items-center justify-center border border-white col-span-4 md:col-span-1 row-span-2 rounded-3xl col-start-1 md:col-start-3 row-start-17 md:row-start-7"
               >
                 <GeometricShapes />
               </div>
               <!-- see more -->
               <div
-                class="flex items-center hover:bg-purple-500 justify-center border border-white col-span-1 row-span-2 rounded-3xl row-start-7 col-start-4"
+                class="flex items-center hover:bg-purple-500 justify-center border border-white col-span-4 md:col-span-1 row-span-2 rounded-3xl row-start-19 md:row-start-7 col-start-1 md:col-start-4"
               >
                 <RouterLink
                   class="hover:scale-105 font-extrabold ease-in-out duration-100 w-full h-full flex items-center justify-center"
