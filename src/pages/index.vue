@@ -82,8 +82,8 @@ const skills = reactive<Skill[]>([
   { id: 12, name: 'IE', icon: markRaw(IconIE), x: 0, y: 0, visible: false },
   { id: 13, name: 'Node Js', icon: markRaw(IconNodeJS), x: 0, y: 0, visible: false },
   { id: 14, name: 'PocketBase', icon: markRaw(IconPB), x: 0, y: 0, visible: false },
-  { id: 15, name: 'Tailwind', icon: markRaw(IconTailwind), x: 0, y: 0, visible: false },
   { id: 16, name: 'TypeScript', icon: markRaw(IconTS), x: 0, y: 0, visible: false },
+  { id: 15, name: 'Tailwind', icon: markRaw(IconTailwind), x: 0, y: 0, visible: false },
   { id: 17, name: 'Wordpress', icon: markRaw(IconWP), x: 0, y: 0, visible: false }
 ])
 
@@ -137,7 +137,7 @@ const onDrag = (event: MouseEvent | TouchEvent) => {
   if (!sectionElement) return
 
   const { offsetWidth: sectionWidth, offsetHeight: sectionHeight } = sectionElement
-  const iconSize = window.innerWidth >= 1024 ? 128 : 80
+  const iconSize = window.innerWidth >= 1024 ? 128 : 56
 
   const skill = skills.find((s) => s.id === activeSkillId.value)
   if (skill) {
@@ -237,7 +237,7 @@ onMounted(() => {
   const sectionElement = sectionRef.value
   if (sectionElement) {
     const { offsetWidth: sectionWidth, offsetHeight: sectionHeight } = sectionElement
-    const iconSize = window.innerWidth >= 1024 ? 128 : 80
+    const iconSize = window.innerWidth >= 1024 ? 128 : 56
     generateRandomPositions(sectionWidth, sectionHeight, iconSize)
   }
 
@@ -348,7 +348,7 @@ function scrollToSection() {
     <section
       id="section2"
       ref="sectionRef"
-      class="section-snap snap-start flex flex-col bg-black relative w-full"
+      class="section-snap snap-start flex flex-col bg-black relative w-full max-h-full"
     >
       <div class="flex justify-between items-center">
         <h2 class="title1 my-6 border-b flex gap-2 border-white w-fit">
@@ -379,7 +379,7 @@ function scrollToSection() {
                 shake: isDragging && activeSkillId === skill.id
               }"
             >
-              <component :is="skill.icon" class="w-20 h-20 lg:w-32 lg:h-32" :title="skill.name" />
+              <component :is="skill.icon" class="w-14 h-14 lg:w-32 lg:h-32" :title="skill.name" />
             </div>
           </div>
         </div>
