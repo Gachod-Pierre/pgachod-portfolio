@@ -28,6 +28,7 @@ import IconTailwind from '@/components/icons/iconTailwind.vue'
 import IconTS from '@/components/icons/iconTS.vue'
 import IconWP from '@/components/icons/iconWP.vue'
 import { RouterLink } from 'vue-router'
+import GeometricShapes from '@/components/GeometricShapes.vue'
 
 const props = defineProps<{
   project: {
@@ -259,10 +260,6 @@ function scrollToSection() {
     section.scrollIntoView({ behavior: 'smooth' })
   }
 }
-
-const formattedDate = computed(() => {
-  return dateProjet ? dateProjet.split(' ')[0] : ''
-})
 </script>
 
 <template>
@@ -280,10 +277,10 @@ const formattedDate = computed(() => {
 
     <!-- Section 1 : Carrousel -->
     <section
-      class="section-snap snap-start flex flex-col justify-between items-center w-full bg-black text-white"
+      class="section-snap snap-start flex flex-col justify-between items-center w-full max-h-full bg-black text-white"
     >
       <div
-        class="flex flex-col justify-between car-lg:flex-row max-w-full max-h-full lg:justify-start self-stretch relative md:gap-[76px] overflow-hidden"
+        class="flex flex-col justify-between car-lg:flex-row max-w-full max-h-full lg:justify-start self-stretch relative md:gap-[50px] gap-8 overflow-hidden"
       >
         <div
           class="flex flex-col justify-start items-start flex-grow relative gap-10 lg:gap-[88px]"
@@ -331,16 +328,18 @@ const formattedDate = computed(() => {
         </Carousel>
         <LoadingSpinner v-else />
       </div>
-      <div class="w-full border-b border-white flex justify-center items-center bg-black flex-grow">
-        <Vue3Marquee :pause-on-hover="true" :loop="0" class="flex-grow overflow-hidden">
-          <p class="text-[20vh] font-extrabold text-left text-white">
-            WEB DEVELOPER
-            <span class="text-[20vh] font-thin text-left text-white">SEARCH ENGINE OPTIMISER</span>
-            DESIGNER
-            <span class="text-[20vh] font-light text-left text-white">PROJECT MANAGEMENT</span>
-          </p>
-        </Vue3Marquee>
-      </div>
+      <Vue3Marquee :pause-on-hover="true" :loop="0" class="border-b flex-grow overflow-hidden">
+        <p class="flex-grow overflow-hidden text-[10vh] lg:text-[25vh] font-extrabold text-left text-white">
+          WEB DEVELOPER
+          <span class="text-[10vh] lg:text-[25vh] font-thin text-left text-white"
+            >SEARCH ENGINE OPTIMISER</span
+          >
+          DESIGNER
+          <span class="text-[10vh] lg:text-[25vh] font-light text-left text-white"
+            >PROJECT MANAGEMENT</span
+          >
+        </p>
+      </Vue3Marquee>
     </section>
 
     <!-- Section Skills -->
@@ -399,15 +398,17 @@ const formattedDate = computed(() => {
         class="h-full w-full flex items-center justify-center"
         v-bind="config2"
       >
-        <Slide class="px-20" v-for="project in projects" :key="project.id">
+        <Slide class="lg:px-20" v-for="project in projects" :key="project.id">
           <RouterLink class="w-full h-fit" to="/"
             ><!-- :to="`/equipes/${equipe.id}`" -->
             <div class="grid grid-cols-4 grid-rows-8 gap-5 w-full h-fit">
-              <!-- Titre du  -->
+              <!-- Titre du projet -->
               <div
-                class="flex items-center border border-white col-span-2 col-start-1 row-span-2 row-start-1 rounded-3xl"
+                class="flex items-center font-tems-center border border-white col-span-2 col-start-1 row-span-2 row-start-1 rounded-3xl"
               >
-                <p class="px-3">{{ project.nomProjet }}</p>
+                <p class="px-3 titleProject2">
+                  {{ project.nomProjet }} <span class="titleProject">project</span>
+                </p>
               </div>
               <!-- Catégorie du projet -->
               <div
@@ -446,14 +447,14 @@ const formattedDate = computed(() => {
               <div
                 class="flex items-center justify-center border border-white col-span-1 row-span-2 rounded-3xl col-start-3 row-start-7"
               >
-                <p>illus</p>
+                <GeometricShapes />
               </div>
               <!-- see more -->
               <div
                 class="flex items-center hover:bg-purple-500 justify-center border border-white col-span-1 row-span-2 rounded-3xl row-start-7 col-start-4"
               >
                 <RouterLink
-                  class="hover:scale-105 ease-in-out duration-100 w-full h-full flex items-center justify-center"
+                  class="hover:scale-105 font-extrabold ease-in-out duration-100 w-full h-full flex items-center justify-center"
                   to="/"
                 >
                   &lt;/see project&gt;</RouterLink

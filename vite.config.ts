@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import VueRouter from 'unplugin-vue-router/vite'
 
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
@@ -14,6 +15,10 @@ export default defineConfig({
     vue(),
     vueDevTools()
   ],
+  server: {
+    host: '0.0.0.0',
+    port: 5174
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
