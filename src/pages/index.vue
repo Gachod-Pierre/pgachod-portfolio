@@ -30,12 +30,6 @@ import IconWP from '@/components/icons/iconWP.vue'
 import { RouterLink } from 'vue-router'
 import GeometricShapes from '@/components/GeometricShapes.vue'
 
-const props = defineProps<{
-  project: {
-    descriptionProjet: string
-    // autres propriétés du projet
-  }
-}>()
 
 function truncateText(text: string, wordLimit: number): string {
   if (!text) return ''
@@ -330,14 +324,14 @@ function scrollToSection() {
       </div>
       <Vue3Marquee :pause-on-hover="true" :loop="0" class="border-b flex-grow overflow-hidden">
         <p
-          class="flex-grow overflow-hidden text-[10vh] lg:text-[25vh] font-extrabold text-left text-white"
+          class="flex-grow overflow-hidden text-[10dvh] lg:text-[25vh] font-extrabold text-left text-white"
         >
           WEB DEVELOPER
-          <span class="text-[10vh] lg:text-[25vh] font-thin text-left text-white"
+          <span class="text-[10dvh] lg:text-[25vh] font-thin text-left text-white"
             >SEARCH ENGINE OPTIMISER</span
           >
           DESIGNER
-          <span class="text-[10vh] lg:text-[25vh] font-light text-left text-white"
+          <span class="text-[10dvh] lg:text-[25vh] font-light text-left text-white"
             >PROJECT MANAGEMENT</span
           >
         </p>
@@ -403,7 +397,7 @@ function scrollToSection() {
         <Slide class="lg:px-20" v-for="project in projects" :key="project.id">
           <RouterLink class="w-full h-fit" to="/"
             ><!-- :to="`/equipes/${equipe.id}`" -->
-            <div class="grid grid-cols-2 md:grid-cols-4 grid-rows-8 gap-3 md:gap-5 w-full h-fit">
+            <div class="grid grid-cols-2 md:grid-cols-4 grid-rows-8 gap-3 md:gap-5 w-full h-fit px-1">
               <!-- Titre du projet -->
               <div
                 class="flex items-center border border-white col-span-2 col-start-1 row-span-2 row-start-1 rounded-3xl"
@@ -426,9 +420,9 @@ function scrollToSection() {
                   v-if="project.imageProjet"
                   :record="project"
                   :filename="project.imageProjet[0]"
-                  width="full"
+                  width=""
                   height="full"
-                  class="object-contain h-full w-full"
+                  class="h-full"
                 />
               </div>
               <!-- Date -->
@@ -441,10 +435,10 @@ function scrollToSection() {
               <div
                 class="flex items-center text-start border border-white col-span-2 row-span-5 rounded-3xl col-start-1 md:col-start-3 row-start-9 md:row-start-2"
               >
-                <p class="px-3 hidden md:flex">
+                <p class="py-1 px-3 hidden md:flex">
                   {{ truncateText(project.descriptionProjet, 70) }}
                 </p>
-                <p class="px-3 md:hidden sm:flex">
+                <p class="py-1 px-3 md:hidden sm:flex">
                   {{ truncateText(project.descriptionProjet, 20) }}
                 </p>
               </div>
@@ -456,7 +450,7 @@ function scrollToSection() {
               </div>
               <!-- see more -->
               <div
-                class="flex items-center hover:bg-purple-500 justify-center border border-white col-span-2 md:col-span-1 md:row-span-2 row-span-1 rounded-3xl row-start-14 md:row-start-7 col-start-1 md:col-start-4"
+                class="flex items-center bg-purple-700 hover:bg-purple-500 justify-center border border-white col-span-2 md:col-span-1 md:row-span-2 row-span-1 rounded-3xl row-start-14 md:row-start-7 col-start-1 md:col-start-4"
               >
                 <RouterLink
                   class="hover:scale-105 font-extrabold ease-in-out duration-100 w-full h-full flex items-center justify-center"

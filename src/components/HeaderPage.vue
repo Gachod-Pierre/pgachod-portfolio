@@ -13,7 +13,7 @@ function closeMenu() {
 </script>
 <template>
   <header
-    class="flex items-center justify-between py-12 gap-24 bg-transparent h-20 lg:w-[300px] lg:h-[100vh] lg:fixed lg:top-0 lg:right-0 lg:shadow-nav lg:overflow-hidden lg:px-[50px] lg:py-[50px] lg:flex-col lg:gap-6 lg:items-center lg:bg-neutral-900 lg:flex"
+    class="flex items-center justify-between py-12 bg-transparent h-20 lg:w-[300px] lg:h-[100vh] lg:fixed lg:top-0 lg:right-0 lg:shadow-nav lg:overflow-hidden lg:px-[50px] lg:py-[50px] lg:flex-col lg:gap-6 lg:items-center lg:bg-neutral-900 lg:flex"
     :class="{ '!bg-black': activeMenu }"
   >
     <RouterLink to="/" @click="closeMenu" class="flex justify-center items-center">
@@ -28,7 +28,7 @@ function closeMenu() {
     </button>
 
     <nav
-      class="text-center gap-[16vh] place-items-center text-3xl invisible opacity-0 py-20 flex justify-between mt-24 pt-24 flex-col fixed z-10 inset-0 bg-black lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
+      class="text-center place-items-center text-3xl invisible opacity-0 py-12 md:gap-[16vh] flex justify-between mt-24 flex-col fixed z-10 inset-0 bg-black lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
       :class="{ '!visible !opacity-100': activeMenu }"
       v-scroll-lock="activeMenu"
     >
