@@ -285,3 +285,96 @@ button {
   --vc-clr-primary: #7E22CE !important;
   --vc-clr-secondary: #C786FF !important;
 }
+
+/* Index.vue */
+
+.snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100dvh;
+  scroll-behavior: smooth;
+}
+
+.section-snap {
+  scroll-snap-align: start;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  section {
+    height: calc(100dvh - 96px);
+  }
+
+  .snap-container {
+    height: calc(100dvh - 96px);
+  }
+
+  .section-snap {
+    scroll-snap-align: start;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+}
+
+body.no-select {
+  user-select: none; /* Désactive la sélection de texte */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: rotate(-1deg);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: rotate(1deg);
+  }
+}
+
+.icon-glow {
+  animation: breathe 2s infinite;
+}
+
+.shake {
+  animation: shake 1s infinite;
+}
+
+.grid-background {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px; /* Taille des carreaux */
+}
