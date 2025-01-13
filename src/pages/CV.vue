@@ -17,22 +17,3 @@ const AsyncPgcv = defineAsyncComponent(() => import('@/components/icons/pgcv.vue
     </template>
   </Suspense>
 </template>
-
-<style>
-.loading-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@media (min-width: 1024px) {
-  .loading-container {
-    position: absolute;
-    top: 50%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-</style>

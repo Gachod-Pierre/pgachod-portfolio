@@ -5,6 +5,7 @@ import { ref } from 'vue'
 
 //export de la connexion à PocketBase afin de le réutiliser dans les composants
 export const pb = new PocketBase(import.meta.env.VITE_URL_POCKETBASE) as TypedPocketBase
+pb.autoCancellation(false)
 
 //Déconnecte l'utilisateur
 export function logout () {

@@ -13,12 +13,16 @@ import Logo from './icons/logo.vue'
 
 <style scoped>
 .spinner-container {
+  position: fixed; /* Position fixe pour couvrir toute la fenêtre */
+  top: 0;
+  left: 0;
   background-color: black;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  width: 100%;
+  height: 100vh; /* Utilisation de vh pour couvrir toute la hauteur de la fenêtre */
+  width: 100vw; /* Utilisation de vw pour couvrir toute la largeur de la fenêtre */
+  z-index: 1000;
 }
 
 .spinner {

@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, reactive, type Component, computed } from 'vue'
+import { ref, onMounted, onUnmounted, reactive, type Component, defineAsyncComponent } from 'vue'
 import { pb } from '@/backend'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import { useIntersectionObserver } from '@vueuse/core'
 import { markRaw } from 'vue'
 import ImgPb from '@/components/ImgPb.vue'
-import { defineProps } from 'vue'
 
 import IconHtml from '@/components/icons/iconHtml.vue'
 import IconCss from '@/components/icons/iconCss.vue'
@@ -30,7 +29,6 @@ import IconWP from '@/components/icons/iconWP.vue'
 import { RouterLink } from 'vue-router'
 import GeometricShapes from '@/components/GeometricShapes.vue'
 
-
 function truncateText(text: string, wordLimit: number): string {
   if (!text) return ''
   const words = text.split(' ')
@@ -48,6 +46,10 @@ interface Skill {
   initialX?: number
   initialY?: number
 }
+
+const AsyncCarousel1 = defineAsyncComponent(() => import('@/components/AsyncCarousel1.vue'))
+const AsyncCarousel2 = defineAsyncComponent(() => import('@/components/AsyncCarousel2.vue'))
+
 
 const config = reactive({
   autoplay: 2200,
@@ -307,22 +309,7 @@ function scrollToSection() {
             </p>
           </div>
         </div>
-        <Carousel
-          v-if="config.autoplayEnabled"
-          ref="myCarrousel"
-          class="max-h-fit items-center flex"
-          v-bind="config"
-        >
-          <Slide v-for="(image, index) in images" :key="index">
-            <div class="carousel__item h-full w-fit px-1">
-              <img :src="image" :alt="'Slide ' + (index + 1)" class="w-full h-full object-cover" />
-            </div>
-          </Slide>
-          <template #addons>
-            <Navigation />
-          </template>
-        </Carousel>
-        <LoadingSpinner v-else />
+        <AsyncCarousel1/>
       </div>
       <Vue3Marquee :pause-on-hover="true" :loop="0" class="border-b flex-grow overflow-hidden">
         <p
@@ -385,89 +372,13 @@ function scrollToSection() {
     <!-- Section 3 -->
 
     <section
-      class="section-snap snap-start flex flex-col justify-between items-center w-full max-h-full bg-black text-white"
+      class="section-snap snap-start flex flex-col justify-center gap-[7dvh] items-center w-full max-h-full bg-black text-white"
     >
       <h2 class="self-start flex gap-2 text-left border-b border-white w-fit">
         <span class="title3">Lastest</span><br />
         <span class="title4">projects</span>
       </h2>
-      <Carousel
-        ref="myCarrousel"
-        class="h-full w-full flex items-center justify-center"
-        v-bind="config2"
-      >
-        <Slide class="lg:px-20" v-for="project in projects" :key="project.id">
-          <RouterLink class="w-full h-fit" to="/"
-            ><!-- :to="`/equipes/${equipe.id}`" -->
-            <div class="grid grid-cols-2 md:grid-cols-4 grid-rows-8 gap-3 md:gap-5 w-full h-fit px-1">
-              <!-- Titre du projet -->
-              <div
-                class="flex items-center border border-white col-span-2 col-start-1 row-span-2 row-start-1 rounded-3xl"
-              >
-                <p class="px-3 titleProject2">
-                  {{ project.nomProjet }} <span class="titleProject">project</span>
-                </p>
-              </div>
-              <!-- Catégorie du projet -->
-              <div
-                class="flex items-center justify-center border border-white col-span-1 md:col-span-2 col-start-1 md:col-start-3 row-span-1 row-start-8 md:row-start-1 rounded-3xl"
-              >
-                <p>{{ project.typeProjet }}</p>
-              </div>
-              <!-- Image du projet -->
-              <div
-                class="overflow-hidden border border-white col-span-2 h-auto row-span-5 rounded-3xl col-start-1 md:row-start-3"
-              >
-                <ImgPb
-                  v-if="project.imageProjet"
-                  :record="project"
-                  :filename="project.imageProjet[0]"
-                  width=""
-                  height="full"
-                  class="h-full"
-                />
-              </div>
-              <!-- Date -->
-              <div
-                class="flex items-center justify-center border border-white col-span-1 md:col-span-2 col-start-2 row-span-1 rounded-3xl row-start-8"
-              >
-                <p>{{ project.dateProjet ? project.dateProjet.split(' ')[0] : '' }}</p>
-              </div>
-              <!-- Description du projet -->
-              <div
-                class="flex items-center text-start border border-white col-span-2 row-span-5 rounded-3xl col-start-1 md:col-start-3 row-start-9 md:row-start-2"
-              >
-                <p class="py-1 px-3 hidden md:flex">
-                  {{ truncateText(project.descriptionProjet, 70) }}
-                </p>
-                <p class="py-1 px-3 md:hidden sm:flex">
-                  {{ truncateText(project.descriptionProjet, 20) }}
-                </p>
-              </div>
-              <!-- Illus du projet -->
-              <div
-                class="hidden md:flex items-center justify-center border border-white col-span-2 md:col-span-1 row-span-2 rounded-3xl col-start-1 md:col-start-3 row-start-17 md:row-start-7"
-              >
-                <GeometricShapes />
-              </div>
-              <!-- see more -->
-              <div
-                class="flex items-center bg-purple-700 hover:bg-purple-500 justify-center border border-white col-span-2 md:col-span-1 md:row-span-2 row-span-1 rounded-3xl row-start-14 md:row-start-7 col-start-1 md:col-start-4"
-              >
-                <RouterLink
-                  class="hover:scale-105 font-extrabold ease-in-out duration-100 w-full h-full flex items-center justify-center"
-                  to="/"
-                >
-                  &lt;/see project&gt;</RouterLink
-                >
-              </div>
-            </div></RouterLink
-          >
-        </Slide>
-        <template #addons>
-          <Navigation />
-        </template>
-      </Carousel>
+      <AsyncCarousel2 />
     </section>
   </div>
 </template>

@@ -1,25 +1,11 @@
 <template>
-  <div class="scroll-container">
-    <!-- Section 1 -->
-    <div class="section" style="background-color: #1abc9c">
-      <h1>Section 1</h1>
-    </div>
-    <!-- Section 2 -->
-    <div class="section" style="background-color: #3498db">
-      <h1>Section 2</h1>
-    </div>
-    <!-- Section 3 -->
-    <div class="section" style="background-color: #9b59b6">
-      <h1>Section 3</h1>
-    </div>
-    <!-- Section 4 -->
-    <div class="section" style="background-color: #e74c3c">
-      <h1>Section 4</h1>
-    </div>
-  </div>
+ 
+  <AsyncCarousel1/>
 </template>
 
 <script setup>
+import AsyncCarousel1 from '@/components/AsyncCarousel1.vue';
+
 /* Pas besoin de logique dynamique ici */
 </script>
 
