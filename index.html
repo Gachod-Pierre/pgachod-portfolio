@@ -2,26 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.png" />
+    <!-- Favicon pour les navigateurs classiques (format .ico) -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <!-- Favicon pour Android (résolution 192x192) -->
+    <link rel="icon" href="/android-chrome-192x192.png" sizes="192x192" />
+
+    <!-- Favicon pour Android (résolution 512x512) -->
+    <link rel="icon" href="/android-chrome-512x512.png" sizes="512x512" />
+
+    <!-- Icône pour les raccourcis d'écran d'accueil sur Apple (iOS) -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Pour la compatibilité avec les tuiles dans Windows / Edge -->
+    <meta name="msapplication-TileImage" content="/android-chrome-192x192.png" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Meta description -->
     <meta
       name="description"
       content="Bienvenue sur le portfolio de Pierre Gachod, développeur spécialisé en web et multimédia. Découvrez mes projets et réalisations."
     />
-
-    <!-- Mots-clés (facultatif, moins utilisé par Google aujourd'hui) -->
     <meta
       name="keywords"
       content="Pierre Gachod, portfolio, développeur web, multimédia, projets web"
     />
-
-    <!-- Auteur -->
     <meta name="author" content="Pierre Gachod" />
-
-    <!-- Canonical URL -->
     <link rel="canonical" href="https://www.pierre-gachod.fr" />
-    <!-- ld+json -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -32,7 +39,6 @@
         "sameAs": ["https://www.linkedin.com/in/pierre-gachod/", "https://github.com/Gachod-Pierre"]
       }
     </script>
-    <!-- Open Graph -->
     <meta property="og:title" content="Pierre Gachod - Développeur Web" />
     <meta
       property="og:description"
