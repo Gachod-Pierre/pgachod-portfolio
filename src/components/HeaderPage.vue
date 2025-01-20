@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import logo from '@/components/icons/logo.vue'
+import logo from '@/components/icons/logo-site.vue'
 import { RouterLink } from 'vue-router'
 import Button from './Button.vue'
 import GithubLogo from './icons/githubLogo.vue'
