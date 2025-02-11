@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import 'vue3-carousel/dist/carousel.css'
 import { pb } from '@/backend'
 
 const config = reactive({
-  autoplay: 2200,
-  wrapAround: true,
+  autoplay: 0,
+  wrapAround: false,
   pauseAutoplayOnHover: true,
-  autoplayEnabled: false
 })
 
 const images = ref<{ id: string; url: string }[]>([]) // Tableau pour stocker les images avec leur ID
@@ -34,6 +33,14 @@ const loadProjectImages = async () => {
 
 // Charge les images
 loadProjectImages()
+
+onMounted(() => {
+  setTimeout(() => {
+    config.wrapAround = true
+    config.autoplay = 2200
+  }, 0.1) // Change wrapAround to true and autoplay to 2200 after 5 seconds
+})
+
 </script>
 
 <template>
