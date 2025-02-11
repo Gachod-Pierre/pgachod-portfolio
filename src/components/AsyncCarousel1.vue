@@ -38,7 +38,7 @@ onMounted(() => {
   setTimeout(() => {
     config.wrapAround = true
     config.autoplay = 2200
-  }, 0.1) // Change wrapAround to true and autoplay to 2200 after 5 seconds
+  }, 1000) // Change wrapAround to true and autoplay to 2200 after 5 seconds
 })
 
 </script>
