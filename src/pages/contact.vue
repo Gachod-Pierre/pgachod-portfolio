@@ -49,6 +49,12 @@ const sendEmail = () => {
       console.log('FAILED...', error);
     });
 };
+
+const adjustTextareaHeight = (event: Event) => {
+  const textarea = event.target as HTMLTextAreaElement;
+  textarea.style.height = 'auto'; // Réinitialise la hauteur
+  textarea.style.height = `${textarea.scrollHeight}px`; // Ajuste à la hauteur du contenu
+};
 </script>
 
 <template>
@@ -85,6 +91,24 @@ const sendEmail = () => {
                   </div>
                 </div>
               </div>
+              <label
+                :for="field.name"
+                class="absolute top-0 left-0 text-base font-light lg:text-xl transition-all"
+                :class="{'-top-6 text-sm': formData[field.name]}"
+              >
+                {{ field.label }}
+              </label>
+            </template>
+            <template v-else-if="field.type === 'textarea'">
+              <textarea
+                v-model="formData[field.name]"
+                :id="field.name"
+                :name="field.name"
+                class="mt-1 block w-full p-2 border-b border-[#7E22CE] bg-transparent focus:outline-none placeholder-transparent"
+                placeholder=" "
+                required
+                @input="adjustTextareaHeight"
+              ></textarea>
               <label
                 :for="field.name"
                 class="absolute top-0 left-0 text-base font-light lg:text-xl transition-all"
@@ -147,6 +171,7 @@ label {
   position: relative;
   border: 1px solid #7e22ce;
   padding: 0.5rem;
+  margin-top: 3rem;
   border-radius: 0.25rem;
   cursor: pointer;
   background-color: transparent;
@@ -198,5 +223,17 @@ label {
 
 .custom-select-box[aria-expanded="true"] .arrow {
   transform: translateY(-50%) rotate(180deg);
+}
+
+textarea {
+  resize: none; /* Désactive le redimensionnement manuel */
+  overflow-y: hidden; /* Cache le défilement vertical */
+  width: 100%; /* Assure que la largeur reste fixe */
+  min-height: 2.5rem; /* Définit une hauteur minimale égale à celle des autres champs */
+  line-height: 1.5rem; /* Assure un espacement cohérent du texte */
+  padding: 0.5rem; /* Même padding que les autres champs */
+  max-height: 10rem; /* Réduit la hauteur maximale pour éviter que le titre soit affecté */
+  border-bottom: 1px solid #7E22CE; /* Assure une cohérence visuelle avec les autres champs */
+  background-color: transparent; /* Même style de fond */
 }
 </style>

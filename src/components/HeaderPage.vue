@@ -13,11 +13,11 @@ function closeMenu() {
 </script>
 <template>
   <header
-    class="flex items-center justify-between py-12 bg-transparent h-20 lg:w-[300px] lg:h-[100vh] lg:fixed lg:top-0 lg:right-0 lg:shadow-nav lg:overflow-hidden lg:px-[50px] lg:py-[50px] lg:flex-col lg:gap-6 lg:items-center lg:bg-neutral-900 lg:flex"
+    class="flex items-center justify-between py-8 bg-transparent h-20 lg:w-[300px] lg:h-[100vh] lg:fixed lg:top-0 lg:right-0 lg:shadow-nav lg:overflow-hidden lg:px-[50px] lg:py-[50px] lg:flex-col lg:gap-6 lg:items-center lg:bg-neutral-900 lg:flex"
     :class="{ '!bg-black': activeMenu }"
   >
     <RouterLink to="/" @click="closeMenu" class="flex justify-center items-center">
-      <logo class="lg:h-[100px] lg:w-[84px]" />
+      <logo class="h-[50px] w-[42px] lg:h-[100px] lg:w-[84px]" />
     </RouterLink>
     <button
       class="relative z-10 flex h-3 w-6 flex-col justify-between lg:hidden *:block *:ease *:h-[2px] *:w-full *:transform *:rounded-full *:bg-white *:transition *:duration-300"
@@ -81,7 +81,3 @@ function closeMenu() {
     </nav>
   </header>
 </template>
-
-class="logo_anim z-10 w-[300px] h-[100vh] rounded-bl-3xl fixed top-0 right-0 shadow-nav
-overflow-hidden px-[50px] py-[30px] flex flex-col gap-6 items-center rounded-tl-3xl bg-lightblack
-hidden lg:flex"

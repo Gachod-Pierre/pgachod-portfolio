@@ -39,7 +39,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="carousel-container">
+  <div class="">
     <Carousel v-if="config2.autoplayEnabled" class="h-full w-full flex items-center justify-center" v-bind="config2">
       <Slide class="lg:px-20" v-for="project in projects" :key="project.id">
         <RouterLink class="w-full h-fit" :to="`/projects/${project.id}`">
@@ -64,9 +64,6 @@ onMounted(() => {
                 v-if="project.imageProjet"
                 :record="project"
                 :filename="project.imageProjet[0]"
-                width=""
-                height="full"
-                class="h-full"
               />
             </div>
             <!-- Date -->
@@ -83,7 +80,7 @@ onMounted(() => {
                 {{ truncateText(project.descriptionProjet, 70) }}
               </p>
               <p class="py-1 px-3 md:hidden sm:flex">
-                {{ truncateText(project.descriptionProjet, 20) }}
+                {{ truncateText(project.descriptionProjet, 15) }}
               </p>
             </div>
             <!-- Illus du projet -->
@@ -112,3 +109,4 @@ onMounted(() => {
     </Carousel>
   </div>
 </template>
+
