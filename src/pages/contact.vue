@@ -3,12 +3,12 @@ import { ref } from 'vue'
 import emailjs from 'emailjs-com'
 
 interface FormData {
-  lname: string;
-  fname: string;
-  email: string;
-  subject: string;
-  message: string;
-  [key: string]: string;
+  lname: string
+  fname: string
+  email: string
+  subject: string
+  message: string
+  [key: string]: string
 }
 
 const formData = ref<FormData>({
@@ -17,44 +17,51 @@ const formData = ref<FormData>({
   email: '',
   subject: '',
   message: ''
-});
+})
 
 const fields = [
   { name: 'lname', type: 'text', label: 'Nom' },
   { name: 'fname', type: 'text', label: 'Prénom' },
   { name: 'email', type: 'email', label: 'Adresse mail' },
-  { name: 'subject', type: 'custom-select', label: 'Sujet', options: ['Collaboration', 'Question', 'Problème technique', 'Retour d\'expérience', 'Autre'] },
+  {
+    name: 'subject',
+    type: 'custom-select',
+    label: 'Sujet',
+    options: ['Collaboration', 'Question', 'Problème technique', "Retour d'expérience", 'Autre']
+  },
   { name: 'message', type: 'textarea', label: 'Dites nous...' }
-];
+]
 
-const isDropdownOpen = ref(false);
-const selectedOption = ref('');
+const isDropdownOpen = ref(false)
+const selectedOption = ref('')
 
 const toggleDropdown = () => {
-  isDropdownOpen.value = !isDropdownOpen.value;
-};
+  isDropdownOpen.value = !isDropdownOpen.value
+}
 
 const selectOption = (option: string, event: Event) => {
-  event.stopPropagation();
-  selectedOption.value = option;
-  formData.value.subject = option;
-  isDropdownOpen.value = false;
-};
+  event.stopPropagation()
+  selectedOption.value = option
+  formData.value.subject = option
+  isDropdownOpen.value = false
+}
 
 const sendEmail = () => {
-  emailjs.send('service_5eodjiv', 'template_a8lynwv', formData.value, 'oqwwwOKPcLfPJlMV-')
-    .then((response) => {
-      console.log('SUCCESS!', response.status, response.text);
-    }, (error) => {
-      console.log('FAILED...', error);
-    });
-};
+  emailjs.send('service_5eodjiv', 'template_a8lynwv', formData.value, 'oqwwwOKPcLfPJlMV-').then(
+    (response) => {
+      console.log('SUCCESS!', response.status, response.text)
+    },
+    (error) => {
+      console.log('FAILED...', error)
+    }
+  )
+}
 
 const adjustTextareaHeight = (event: Event) => {
-  const textarea = event.target as HTMLTextAreaElement;
-  textarea.style.height = 'auto'; // Réinitialise la hauteur
-  textarea.style.height = `${textarea.scrollHeight}px`; // Ajuste à la hauteur du contenu
-};
+  const textarea = event.target as HTMLTextAreaElement
+  textarea.style.height = 'auto' // Réinitialise la hauteur
+  textarea.style.height = `${textarea.scrollHeight}px` // Ajuste à la hauteur du contenu
+}
 </script>
 
 <template>
@@ -63,19 +70,21 @@ const adjustTextareaHeight = (event: Event) => {
       <div class="grid grid-cols-1 md:grid-cols-2 gap-[3vw]">
         <div class="flex flex-col gap-14">
           <div class="relative flex justify-between items-center w-full">
-            <h1 class="text-[34px] border-b-2 pb-3 border-[#7E22CE]">
-              Contact
-            </h1>
+            <h1 class="text-[34px] border-b-2 pb-3 border-[#7E22CE]">Contact</h1>
           </div>
           <p class="mb-10">
-             Envie de collaborer ? Un retour constructif ? une question ? 
-            N'hésitez pas à m'en faire part grâce à ce formulaire de contact !
+            Envie de collaborer ? Un retour constructif ? une question ? N'hésitez pas à m'en faire
+            part grâce à ce formulaire de contact !
           </p>
         </div>
         <form @submit.prevent="sendEmail" class="space-y-6">
           <div v-for="(field, index) in fields" :key="index" class="relative">
             <template v-if="field.type === 'custom-select'">
-              <div class="custom-select-box" @click="toggleDropdown" :aria-expanded="isDropdownOpen">
+              <div
+                class="custom-select-box"
+                @click="toggleDropdown"
+                :aria-expanded="isDropdownOpen"
+              >
                 <div class="selected-option">
                   {{ selectedOption || 'Sélectionnez une option' }}
                 </div>
@@ -94,7 +103,7 @@ const adjustTextareaHeight = (event: Event) => {
               <label
                 :for="field.name"
                 class="absolute top-0 left-0 text-base font-light lg:text-xl transition-all"
-                :class="{'-top-6 text-sm': formData[field.name]}"
+                :class="{ '-top-6 text-sm': formData[field.name] }"
               >
                 {{ field.label }}
               </label>
@@ -112,7 +121,7 @@ const adjustTextareaHeight = (event: Event) => {
               <label
                 :for="field.name"
                 class="absolute top-0 left-0 text-base font-light lg:text-xl transition-all"
-                :class="{'-top-6 text-sm': formData[field.name]}"
+                :class="{ '-top-6 text-sm': formData[field.name] }"
               >
                 {{ field.label }}
               </label>
@@ -130,7 +139,7 @@ const adjustTextareaHeight = (event: Event) => {
               <label
                 :for="field.name"
                 class="absolute top-0 left-0 text-base font-light lg:text-xl transition-all"
-                :class="{'-top-6 text-sm': formData[field.name]}"
+                :class="{ '-top-6 text-sm': formData[field.name] }"
               >
                 {{ field.label }}
               </label>
@@ -221,7 +230,7 @@ label {
   transform: translateY(-50%);
 }
 
-.custom-select-box[aria-expanded="true"] .arrow {
+.custom-select-box[aria-expanded='true'] .arrow {
   transform: translateY(-50%) rotate(180deg);
 }
 
@@ -233,7 +242,7 @@ textarea {
   line-height: 1.5rem; /* Assure un espacement cohérent du texte */
   padding: 0.5rem; /* Même padding que les autres champs */
   max-height: 10rem; /* Réduit la hauteur maximale pour éviter que le titre soit affecté */
-  border-bottom: 1px solid #7E22CE; /* Assure une cohérence visuelle avec les autres champs */
+  border-bottom: 1px solid #7e22ce; /* Assure une cohérence visuelle avec les autres champs */
   background-color: transparent; /* Même style de fond */
 }
 </style>

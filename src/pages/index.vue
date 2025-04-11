@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, reactive, type Component, defineAsyncComponent } from 'vue'
 import { pb } from '@/backend'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
+
 import 'vue3-carousel/dist/carousel.css'
 import { useIntersectionObserver } from '@vueuse/core'
 import { markRaw } from 'vue'
-import ImgPb from '@/components/ImgPb.vue'
 
 import IconHtml from '@/components/icons/iconHtml.vue'
 import IconCss from '@/components/icons/iconCss.vue'
@@ -18,7 +17,6 @@ import IconPhotoshop from '@/components/icons/iconPhotoshop.vue'
 import IconPython from '@/components/icons/iconPython.vue'
 import IconVue from '@/components/icons/iconVue.vue'
 import iconClic from '@/components/icons/iconClic.vue'
-import LoadingSpinner from '@/components/LoadingSpinner.vue'
 import IconGit from '@/components/icons/iconGit.vue'
 import IconIE from '@/components/icons/iconIE.vue'
 import IconNodeJS from '@/components/icons/iconNodeJS.vue'
@@ -26,15 +24,6 @@ import IconPB from '@/components/icons/iconPB.vue'
 import IconTailwind from '@/components/icons/iconTailwind.vue'
 import IconTS from '@/components/icons/iconTS.vue'
 import IconWP from '@/components/icons/iconWP.vue'
-import { RouterLink } from 'vue-router'
-import GeometricShapes from '@/components/GeometricShapes.vue'
-
-function truncateText(text: string, wordLimit: number): string {
-  if (!text) return ''
-  const words = text.split(' ')
-  if (words.length <= wordLimit) return text
-  return words.slice(0, wordLimit).join(' ') + '...'
-}
 
 interface Skill {
   id: number
@@ -49,7 +38,6 @@ interface Skill {
 
 const AsyncCarousel1 = defineAsyncComponent(() => import('@/components/AsyncCarousel1.vue'))
 const AsyncCarousel2 = defineAsyncComponent(() => import('@/components/AsyncCarousel2.vue'))
-
 
 const config = reactive({
   autoplay: 2200,
@@ -258,6 +246,19 @@ function scrollToSection() {
     section.scrollIntoView({ behavior: 'smooth' })
   }
 }
+
+const section4Ref = ref<HTMLElement | null>(null)
+const charsVisible = ref(false)
+
+useIntersectionObserver(
+  section4Ref,
+  ([{ isIntersecting }]) => {
+    if (isIntersecting) {
+      charsVisible.value = true
+    }
+  },
+  { threshold: 0.5 }
+)
 </script>
 
 <template>
@@ -284,8 +285,8 @@ function scrollToSection() {
           class="flex flex-col justify-start items-start flex-grow relative gap-10 lg:gap-[88px]"
         >
           <h1 class="self-stretch text-left">
-            <span class="self-stretch title2">Pierre</span><br />
-            <span class="self-stretch title1">Gachod</span>
+            <span class="self-stretch title2">Pierre </span><br />
+            <span class="self-stretch title1">Gachod </span>
           </h1>
           <div
             @click="scrollToSection"
@@ -309,7 +310,7 @@ function scrollToSection() {
             </p>
           </div>
         </div>
-        <AsyncCarousel1/>
+        <AsyncCarousel1 />
       </div>
       <Vue3Marquee :pause-on-hover="true" :loop="0" class="border-b flex-grow overflow-hidden">
         <p
@@ -380,5 +381,77 @@ function scrollToSection() {
       </h2>
       <AsyncCarousel2 />
     </section>
+
+    <!-- Section 4 work together -->
+
+    <section
+      ref="section4Ref"
+      class="section-snap snap-start flex flex-col justify-center gap-[7dvh] items-start w-full max-h-full bg-black text-white"
+    >
+      <h2 class=" flex flex-col lg:flex-row gap-0 lg:gap-2 text-left border-b border-white w-fit">
+        <span class="title3">Let's Work</span><br class="lg:block hidden" />
+        <span class="title4">Together !</span>
+      </h2>
+      <div class="flex justify-center items-center">
+        <a href="./contact"
+          class="cta relative flex items-center justify-center w-12 h-12 rounded-full border-2 border-white-500 text-white transition-all duration-700 hover:w-44"
+        >
+          <p class=" opacity-100 transition-opacity duration-500 hover:opacity-0">></p>
+          <span
+            class="whitespace-nowrap button-text absolute opacity-0 transition-opacity duration-500 w-full left-0 text-center hover:opacity-100"
+            >Contact Me</span
+          >
+        </a>
+      </div>
+    </section>
   </div>
 </template>
+
+<style scoped>
+.container {
+  position: absolute;
+  float: none;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+}
+
+
+.cta {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border: 2px solid rgb(255, 255, 255);
+  color: #fff;
+  transition: width 0.7s;
+  display: flex;
+}
+.cta:hover {
+  width: 180px;
+  transition: width 0.7s;
+}
+
+.cta p {
+  opacity: 1;
+  transition: opacity 0.7s;
+}
+
+.cta:hover p {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.cta .button-text {
+  opacity: 0;
+  transition: opacity 0.3s;
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+.cta:hover .button-text {
+  opacity: 1;
+  transition: opacity 2s;
+}
+
+</style>
