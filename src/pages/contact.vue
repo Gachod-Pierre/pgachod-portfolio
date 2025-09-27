@@ -66,7 +66,7 @@ const adjustTextareaHeight = (event: Event) => {
 
 <template>
   <section class="flex justify-center items-center min-h-screen text-white">
-    <div class="container mx-auto">
+    <div class="max-h-full container mx-auto mt-16 sm:mt-0">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-[3vw]">
         <div class="flex flex-col gap-14">
           <div class="relative flex justify-between items-center w-full">
