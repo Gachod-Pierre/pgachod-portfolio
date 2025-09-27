@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import logo from '@/components/icons/logo-site.vue'
 import { RouterLink } from 'vue-router'
 import Button from './Button.vue'
@@ -7,10 +7,16 @@ import GithubLogo from './icons/githubLogo.vue'
 
 const activeMenu = ref(false)
 
+// Computed property pour l'URL du CV
+const cvUrl = computed(() => {
+  return new URL('@/assets/cv-pierre-gachod.pdf', import.meta.url).href
+})
+
 function closeMenu() {
   activeMenu.value = false
 }
 </script>
+
 <template>
   <header
     class="flex items-center justify-between py-8 bg-transparent h-20 lg:w-[300px] lg:h-[100vh] lg:fixed lg:top-0 lg:right-0 lg:shadow-nav lg:overflow-hidden lg:px-[50px] lg:py-[50px] lg:flex-col lg:gap-6 lg:items-center lg:bg-neutral-900 lg:flex"
@@ -61,13 +67,25 @@ function closeMenu() {
           </RouterLink>
         </li>
         <li>
+          <!-- Affichage pour desktop (iframe) -->
           <RouterLink
-            class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white"
+            class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white hidden sm:block"
             to="/CV"
             @click="closeMenu"
           >
             <span :class="{ 'text-purple-500': $route.path === '/CV' }">CV</span>
           </RouterLink>
+
+          <!-- Affichage pour mobile (nouvel onglet) -->
+          <a
+            class="ease-in-out duration-300 hover:scale-105 block p-4 rounded-lg text-white sm:hidden"
+            :href="cvUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="closeMenu"
+          >
+            <span>CV</span>
+          </a>
         </li>
       </ul>
       <Button
