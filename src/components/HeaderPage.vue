@@ -28,8 +28,8 @@ function closeMenu() {
     </button>
 
     <nav
-      class="text-center place-items-center text-3xl invisible opacity-0 py-12 md:gap-[16vh] flex justify-between mt-24 flex-col fixed z-10 inset-0 bg-black lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:visible lg:opacity-100"
-      :class="{ '!visible !opacity-100': activeMenu }"
+      class="text-center place-items-center text-3xl py-12 md:gap-[16vh] flex justify-between mt-20 flex-col fixed z-10 inset-0 bg-black transform translate-x-full transition-transform duration-300 ease-in-out lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:translate-x-0 lg:transition-none"
+      :class="{ '!translate-x-0': activeMenu }"
       v-scroll-lock="activeMenu"
     >
       <ul class="flex flex-col gap-4 lg:border-l lg:px-6 lg:border-white lg:flex-col">
