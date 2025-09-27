@@ -102,10 +102,37 @@ const generateRandomPositions = (width: number, height: number, size: number) =>
   })
 }
 
+const getIconSize = () => {
+  const width = window.innerWidth
+  const height = window.innerHeight
+
+  // Écrans très petits (mobiles)
+  if (width < 640) return 40
+
+  // Tablettes et petits laptops
+  if (width < 768) return 48
+
+  // Laptops moyens - prendre en compte la hauteur aussi
+  if (width < 1024) {
+    return height < 700 ? 48 : 56
+  }
+
+  // Laptops plus grands
+  if (width < 1280) {
+    return height < 800 ? 64 : 80
+  }
+
+  // Écrans larges
+  if (width < 1536) return 96
+
+  // Très grands écrans
+  return 128
+}
+
 const startDrag = (skillId: number, event: MouseEvent | TouchEvent) => {
   isDragging.value = true
   activeSkillId.value = skillId
-  document.body.classList.add('no-select') // Bloque la sélection de texte globalement
+  document.body.classList.add('no-select')
 
   if (event instanceof TouchEvent) {
     const touch = event.touches[0]
@@ -123,7 +150,7 @@ const onDrag = (event: MouseEvent | TouchEvent) => {
   if (!sectionElement) return
 
   const { offsetWidth: sectionWidth, offsetHeight: sectionHeight } = sectionElement
-  const iconSize = window.innerWidth >= 1024 ? 128 : 56
+  const iconSize = getIconSize()
 
   const skill = skills.find((s) => s.id === activeSkillId.value)
   if (skill) {
@@ -148,14 +175,14 @@ const onDrag = (event: MouseEvent | TouchEvent) => {
     constrainPosition(skill, sectionWidth, sectionHeight, iconSize)
   }
 
-  event.preventDefault() // Bloque le comportement par défaut
+  event.preventDefault()
 }
 
 const stopDrag = () => {
   isDragging.value = false
   activeSkillId.value = null
   lastTouchPosition.value = null
-  document.body.classList.remove('no-select') // Réactive la sélection de texte
+  document.body.classList.remove('no-select')
 }
 
 const constrainPosition = (
@@ -223,7 +250,7 @@ onMounted(() => {
   const sectionElement = sectionRef.value
   if (sectionElement) {
     const { offsetWidth: sectionWidth, offsetHeight: sectionHeight } = sectionElement
-    const iconSize = window.innerWidth >= 1024 ? 128 : 56
+    const iconSize = getIconSize()
     generateRandomPositions(sectionWidth, sectionHeight, iconSize)
   }
 
@@ -363,7 +390,11 @@ useIntersectionObserver(
                 shake: isDragging && activeSkillId === skill.id
               }"
             >
-              <component :is="skill.icon" class="w-14 h-14 lg:w-32 lg:h-32" :title="skill.name" />
+              <component
+                :is="skill.icon"
+                :class="`w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 2xl:w-24 2xl:h-24`"
+                :title="skill.name"
+              />
             </div>
           </div>
         </div>
@@ -376,7 +407,7 @@ useIntersectionObserver(
       class="section-snap snap-start flex flex-col justify-center gap-[7dvh] items-center w-full max-h-full bg-black text-white"
     >
       <h2 class="self-start flex gap-2 text-left border-b border-white w-fit">
-        <span class="title3">Lastest</span><br />
+        <span class="title3">Latest</span><br />
         <span class="title4">projects</span>
       </h2>
       <AsyncCarousel2 />
@@ -388,20 +419,21 @@ useIntersectionObserver(
       ref="section4Ref"
       class="section-snap snap-start flex flex-col justify-center gap-[7dvh] items-start w-full max-h-full bg-black text-white"
     >
-      <h2 class=" flex flex-col lg:flex-row gap-0 lg:gap-2 text-left border-b border-white w-fit">
+      <h2 class="flex flex-col lg:flex-row gap-0 lg:gap-2 text-left border-b border-white w-fit">
         <span class="title3">Let's Work</span><br class="lg:block hidden" />
         <span class="title4">Together !</span>
       </h2>
       <div class="flex justify-center items-center">
-        <a href="./contact"
+        <RouterLink
           class="cta relative flex items-center justify-center w-12 h-12 rounded-full border-2 border-white-500 text-white transition-all duration-700 hover:w-44"
+          to="/contact"
         >
-          <p class=" opacity-100 transition-opacity duration-500 hover:opacity-0">></p>
+          <p class="opacity-100 transition-opacity duration-500 hover:opacity-0">></p>
           <span
             class="whitespace-nowrap button-text absolute opacity-0 transition-opacity duration-500 w-full left-0 text-center hover:opacity-100"
             >Contact Me</span
           >
-        </a>
+        </RouterLink>
       </div>
     </section>
   </div>
@@ -415,7 +447,6 @@ useIntersectionObserver(
   left: 50%;
   text-align: center;
 }
-
 
 .cta {
   width: 50px;
@@ -453,5 +484,4 @@ useIntersectionObserver(
   opacity: 1;
   transition: opacity 2s;
 }
-
 </style>
