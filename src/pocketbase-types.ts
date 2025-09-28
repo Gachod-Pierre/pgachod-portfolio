@@ -37,8 +37,15 @@ export type AuthSystemFields<T = never> = {
 export type ProjetsRecord = {
 	dateProjet?: IsoDateString
 	descriptionProjet?: string
+	detail1?: string
+	detail2?: string
+	detailContent1?: string
+	detailContent2?: string
 	imageProjet?: string[]
+	lienProjet?: string
 	nomProjet?: string
+	outils?: string[]
+	statut?: boolean
 	typeProjet?: string
 }
 

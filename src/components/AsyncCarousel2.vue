@@ -35,17 +35,22 @@ const loadProjects = async () => {
 onMounted(() => {
   loadProjects()
 })
-
 </script>
 
 <template>
   <div class="">
-    <Carousel v-if="config2.autoplayEnabled" class="h-full w-full flex items-center justify-center" v-bind="config2">
+    <Carousel
+      v-if="config2.autoplayEnabled"
+      class="h-full w-full flex items-center justify-center"
+      v-bind="config2"
+    >
       <Slide class="lg:px-20" v-for="project in projects" :key="project.id">
         <RouterLink class="w-full h-fit" :to="`/projects/${project.id}`">
           <div class="grid grid-cols-2 md:grid-cols-4 grid-rows-8 gap-3 md:gap-5 w-full h-fit px-1">
             <!-- Titre du projet -->
-            <div class="flex items-center border border-white col-span-2 col-start-1 row-span-2 row-start-1 rounded-3xl">
+            <div
+              class="flex items-center border border-white col-span-2 col-start-1 row-span-2 row-start-1 rounded-3xl"
+            >
               <p class="px-3 titleProject2">
                 {{ project.nomProjet }} <span class="titleProject">project</span>
               </p>
@@ -109,4 +114,3 @@ onMounted(() => {
     </Carousel>
   </div>
 </template>
-
