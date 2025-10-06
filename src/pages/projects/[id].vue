@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { pb } from '@/backend'
 import ImgPb from '@/components/ImgPb.vue'
@@ -10,6 +10,8 @@ const router = useRouter()
 const project = ref<any>(null)
 const loading = ref(true)
 const error = ref('')
+
+const AsyncCarousel3 = defineAsyncComponent(() => import('@/components/AsyncCarousel3.vue'))
 
 const loadProject = async () => {
   try {
@@ -70,7 +72,7 @@ onMounted(() => {
       </div>
 
       <!-- Project Details -->
-      <div v-else-if="project" class="space-y-20">
+      <div v-else-if="project" class="space-y-20 pb-20">
         <!-- Section principale avec titre/infos à gauche et image à droite -->
         <div class="flex flex-col lg:flex-row gap-20">
           <!-- Informations du projet à gauche -->
@@ -224,6 +226,7 @@ onMounted(() => {
             </div>
           </div>
         </div>
+          <AsyncCarousel3 />
       </div>
     </div>
   </div>
