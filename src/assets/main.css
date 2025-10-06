@@ -305,9 +305,9 @@ button {
 }
 
 @media (max-width: 768px) {
-  section {
+  /* section {
     height: calc(100dvh - 96px);
-  }
+  } */
 
   .snap-container {
     height: calc(100dvh - 96px);
