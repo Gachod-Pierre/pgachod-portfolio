@@ -47,7 +47,7 @@ onMounted(() => {
 <template>
   <div class="min-h-screen bg-black text-white">
     <!-- Header avec bouton retour -->
-    <div class="container py-14">
+    <div class="md:container mx-0 py-14">
       <button
         @click="goBack"
         class="flex items-center gap-2 text-white hover:text-purple-500 transition-colors duration-300 border border-white hover:border-purple-500 p-3 rounded-2xl"
@@ -60,7 +60,7 @@ onMounted(() => {
     </div>
 
     <!-- Contenu principal -->
-    <div class="container">
+    <div class="md:container mx-0">
       <!-- Loading -->
       <div v-if="loading" class="flex justify-center items-center min-h-96">
         <div class="text-2xl">Chargement...</div>
@@ -74,7 +74,7 @@ onMounted(() => {
       <!-- Project Details -->
       <div v-else-if="project" class="space-y-20 pb-20">
         <!-- Section principale avec titre/infos à gauche et image à droite -->
-        <div class="flex flex-col md:flex-row gap-10 md:gap-20">
+        <div class="flex flex-col layout-responsive gap-10 md:gap-20">
           <!-- Informations du projet à gauche -->
           <div class="flex md:flex-col flex-row md:justify-normal justify-between">
             <h1 class="titleProject2">{{ project.nomProjet }}</h1>
@@ -99,11 +99,11 @@ onMounted(() => {
         </div>
 
         <!-- Nouvelle section : Outils/Techno à gauche et Détails à droite -->
-        <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex flex-col layout-responsive gap-8">
           <!-- Outils/Techno à gauche -->
           <div class="flex-1 w-[100%] lg:w[50%]">
             <div
-              class="border border-gray-600 rounded-lg flex flex-col justify-between p-11 grid-background aspect-square"
+              class="border border-gray-600 rounded-lg flex flex-col justify-between p-11 grid-background aspect-square md:aspect-auto"
             >
               <div class="flex flex-col gap-10">
                 <div class="flex flex-col gap-4">
@@ -193,13 +193,12 @@ onMounted(() => {
                     </svg>
                   </a>
                 </div>
-                
               </div>
             </div>
           </div>
 
           <!-- Détails du projet à droite -->
-          <div class="flex-1 flex flex-col gap-10 max-w-[100%] lg:max-w-[50%] ">
+          <div class="flex-1 flex flex-col gap-10 max-w-[100%] layout-responsive:max-w-[50%]">
             <!-- Description -->
             <div class="flex flex-col">
               <p class="text-gray-300 text-justify">{{ project.descriptionProjet }}</p>
@@ -271,6 +270,13 @@ onMounted(() => {
   50%,
   100% {
     stroke-dashoffset: 20;
+  }
+}
+
+/* Ajout : forcer la direction en row à partir de 1225px */
+@media (min-width: 1225px) {
+  .layout-responsive {
+    flex-direction: row;
   }
 }
 </style>
