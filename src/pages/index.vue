@@ -317,7 +317,7 @@ useIntersectionObserver(
           </h1>
           <div
             @click="scrollToSection"
-            class="flex justify-start items-center self-stretch relative gap-[15px]"
+            class="group flex justify-start items-center self-stretch relative gap-[15px] hover:text-purple-500 transition-colors duration-300"
           >
             <svg
               width="25"
@@ -328,8 +328,8 @@ useIntersectionObserver(
               class="mb-2 oscillate w-[23.57px] h-3.5"
               preserveAspectRatio="none"
             >
-              <path d="M1 6L12.6913 15L24.3827 6" stroke="white"></path>
-              <path d="M1.19135 1L12.8827 10L24.574 1" stroke="white"></path>
+              <path d="M1 6L12.6913 15L24.3827 6" class="stroke-white group-hover:stroke-purple-500 transition-colors duration-300" />
+              <path d="M1.19135 1L12.8827 10L24.574 1" class="stroke-white group-hover:stroke-purple-500 transition-colors duration-300" />
             </svg>
             <p class="text-xl font-bold">
               Scroll <span class="text-xl font-light">to</span> Discover
