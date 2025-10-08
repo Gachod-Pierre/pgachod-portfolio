@@ -107,10 +107,10 @@ const getIconSize = () => {
   const height = window.innerHeight
 
   // Écrans très petits (mobiles)
-  if (width < 640) return 40
+  if (width < 640) return 48
 
   // Tablettes et petits laptops
-  if (width < 768) return 48
+  if (width < 768) return 50
 
   // Laptops moyens - prendre en compte la hauteur aussi
   if (width < 1024) {

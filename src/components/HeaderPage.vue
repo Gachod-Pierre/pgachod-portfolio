@@ -34,7 +34,7 @@ function closeMenu() {
     </button>
 
     <nav
-      class="text-center place-items-center text-3xl py-12 md:gap-[16vh] flex justify-between mt-20 flex-col fixed z-10 inset-0 bg-black transform translate-x-full transition-transform duration-300 ease-in-out lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:translate-x-0 lg:transition-none"
+      class="text-center place-items-center text-3xl py-12 md:gap-[16vh] flex justify-between mt-20 flex-col fixed z-10 inset-0 bg-zinc-950 transform translate-x-full transition-transform duration-300 ease-in-out lg:mt-0 lg:text-xl lg:static lg:bg-transparent lg:py-6 lg:translate-x-0 lg:transition-none"
       :class="{ '!translate-x-0': activeMenu }"
       v-scroll-lock="activeMenu"
     >

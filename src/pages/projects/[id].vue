@@ -74,16 +74,18 @@ onMounted(() => {
       <!-- Project Details -->
       <div v-else-if="project" class="space-y-20 pb-20">
         <!-- Section principale avec titre/infos à gauche et image à droite -->
-        <div class="flex flex-col lg:flex-row gap-20">
+        <div class="flex flex-col md:flex-row gap-10 md:gap-20">
           <!-- Informations du projet à gauche -->
-          <div class="flex flex-col">
+          <div class="flex md:flex-col flex-row md:justify-normal justify-between">
             <h1 class="titleProject2">{{ project.nomProjet }}</h1>
-            <p v-if="project.typeProjet" class="text-xl lg:text-2xl text-grey-300 mt-4">
-              {{ project.typeProjet }}
-            </p>
-            <p v-if="project.dateProjet" class="text-lg text-purple-600 mt-2">
-              {{ new Date(project.dateProjet).toLocaleDateString('fr-FR') }}
-            </p>
+            <div>
+              <p v-if="project.typeProjet" class="text-xl lg:text-2xl text-grey-300 mt-0 md:mt-4">
+                {{ project.typeProjet }}
+              </p>
+              <p v-if="project.dateProjet" class="text-lg text-purple-600 mt-2">
+                {{ new Date(project.dateProjet).toLocaleDateString('fr-FR') }}
+              </p>
+            </div>
           </div>
 
           <!-- Image du projet à droite -->
@@ -99,7 +101,7 @@ onMounted(() => {
         <!-- Nouvelle section : Outils/Techno à gauche et Détails à droite -->
         <div class="flex flex-col lg:flex-row gap-8">
           <!-- Outils/Techno à gauche -->
-          <div class="flex-1 w-[50%]">
+          <div class="flex-1 w-[100%] lg:w[50%]">
             <div
               class="border border-gray-600 rounded-lg flex flex-col justify-between p-11 grid-background aspect-square"
             >
@@ -175,27 +177,29 @@ onMounted(() => {
                     </span>
                   </p>
                 </div>
-              </div>
-              <div v-if="project.lienProjet">
-                <a
-                  :href="project.lienProjet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors duration-300"
-                >
-                  Voir le projet
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                      d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
-                    />
-                  </svg>
-                </a>
+                <div v-if="project.lienProjet">
+                  <h3 class="titleProject mb-4">Lien Projet</h3>
+                  <a
+                    :href="project.lienProjet"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors duration-300"
+                  >
+                    Voir le projet
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+                
               </div>
             </div>
           </div>
 
           <!-- Détails du projet à droite -->
-          <div class="flex-1 flex flex-col gap-10 max-w-[50%]">
+          <div class="flex-1 flex flex-col gap-10 max-w-[100%] lg:max-w-[50%] ">
             <!-- Description -->
             <div class="flex flex-col">
               <p class="text-gray-300 text-justify">{{ project.descriptionProjet }}</p>
@@ -226,7 +230,7 @@ onMounted(() => {
             </div>
           </div>
         </div>
-          <AsyncCarousel3 />
+        <AsyncCarousel3 />
       </div>
     </div>
   </div>
