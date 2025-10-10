@@ -45,6 +45,7 @@ onMounted(() => {
 </script>
 
 <template>
+
   <div class="min-h-screen bg-black text-white">
     <!-- Header avec bouton retour -->
     <div class="md:container mx-0 py-14">
