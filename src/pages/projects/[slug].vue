@@ -13,13 +13,29 @@ const error = ref('')
 
 const AsyncCarousel3 = defineAsyncComponent(() => import('@/components/AsyncCarousel3.vue'))
 
+function slugify(str: string) {
+  return String(str)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
 const loadProject = async () => {
   try {
     loading.value = true
-    const projectId = (route.params as { id?: string })?.id ?? ''
+    const slug = (route.params as { slug?: string })?.slug ?? ''
 
-    const projectData = await pb.collection('projets').getOne(projectId)
-    project.value = projectData
+    const all = await pb.collection('projets').getFullList()
+    const found = all.find((p: any) => (p.slug ?? slugify(p.nomProjet)) === slug)
+
+    if (!found) {
+      throw new Error('Projet introuvable')
+    }
+
+    project.value = found
   } catch (err) {
     console.error('Erreur lors du chargement du projet:', err)
     error.value = 'Projet non trouvé'

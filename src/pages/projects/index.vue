@@ -44,7 +44,7 @@
     <RouterLink
       v-for="project in projects"
       :key="project.id"
-      :to="`/projects/${project.id}`"
+      :to="`/projects/${project.slug ?? slugify(project.nomProjet)}`"
       class="project-card relative w-full h-fit block rounded-lg shadow-lg overflow-hidden"
     >
       <!-- Image -->
@@ -252,6 +252,16 @@ function addHoverAnimations() {
       card.addEventListener('mouseleave', resetCard)
     }
   })
+}
+
+function slugify(str: string) {
+  return String(str)
+    .normalize('NFD')                // remove accents
+    .replace(/[\u0300-\u036f]/g, '') // remove diacritics
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
 }
 
 onMounted(async () => {
