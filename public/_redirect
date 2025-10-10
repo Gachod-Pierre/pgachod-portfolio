@@ -1,9 +1,3 @@
-# Rediriger le domaine sans www vers www
-https://portfolio-pgachod.pockethost.io/* https://www.portfolio-pgachod.pockethost.io/:splat 301!
-
-# Redirection pour l'API
-/api/*  https://portfolio-pgachod.pockethost.io/api/:splat  200
-
-# Redirection catch-all pour les autres chemins
-/*  /index.html  200
+/api/*  /api/:splat  200
+/*      /index.html  200
 
