@@ -77,8 +77,8 @@ onMounted(() => {
         <!-- Section principale avec titre/infos à gauche et image à droite -->
         <div class="flex flex-col layout-responsive gap-10 md:gap-20">
           <!-- Informations du projet à gauche -->
-          <div class="flex md:flex-col flex-row md:justify-normal justify-between max-w-[30%]">
-            <h1 class="titleProject2">{{ project.nomProjet }}</h1>
+          <div class="flex md:flex-col flex-row md:justify-normal justify-between max-w-full md:max-w-[30%]">
+            <h1 class="titleProject2 max-w-[30%]">{{ project.nomProjet }}</h1>
             <div>
               <p v-if="project.typeProjet" class="text-xl lg:text-2xl text-grey-300 mt-0 md:mt-4">
                 {{ project.typeProjet }}
