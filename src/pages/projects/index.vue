@@ -40,7 +40,7 @@
   </section>
 
   <!-- GRID DE PROJETS -->
-  <div ref="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div ref="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
     <RouterLink
       v-for="project in projects"
       :key="project.id"
@@ -85,7 +85,7 @@ const projects = ref<any[]>([])
 const titleSection = ref<HTMLElement | null>(null)
 const title = ref<HTMLElement | null>(null)
 const underline = ref<HTMLElement | null>(null)
-const letters = ref('Mes\u00A0Projets'.split(''))
+const letters = ref('My\u00A0Projects'.split(''))
 const orbVisible = ref(false)
 
 let ctx: gsap.Context | null = null
@@ -173,7 +173,7 @@ function animateCards() {
       ease: 'power4.out',
       scrollTrigger: {
         trigger: card,
-        start: 'top bottom-=1',
+        start: 'top bottom',
         toggleActions: 'play none none none'
       },
       delay: i * 0.05
