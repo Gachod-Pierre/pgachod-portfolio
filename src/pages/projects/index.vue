@@ -12,6 +12,7 @@
     </button>
   </div>
 
+
   <!-- SECTION TITRE ANIMÉE -->
 
   <section ref="titleSection" class="relative w-full py-16 md:py-20 overflow-visible">
@@ -24,7 +25,7 @@
     ></div>
 
     <!-- Titre -->
-    <h1 ref="title" class="text-5xl md:text-8xl font-extrabold text-white relative z-10">
+    <h1 ref="title" class="text-5xl md:text-8xl font-extrabold text-white text-nowrap relative">
       <span
         v-for="(letter, index) in letters"
         :key="index"
@@ -35,11 +36,8 @@
     </h1>
 
     <!-- Ligne décorative -->
-  <div ref="underline" class="w-0 h-1 bg-purple-500 mt-4 rounded-full"></div>
-
+    <div ref="underline" class="w-0 h-1 bg-purple-500 mt-4 rounded-full"></div>
   </section>
-
-  
 
   <!-- GRID DE PROJETS -->
   <div ref="grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -87,7 +85,7 @@ const projects = ref<any[]>([])
 const titleSection = ref<HTMLElement | null>(null)
 const title = ref<HTMLElement | null>(null)
 const underline = ref<HTMLElement | null>(null)
-const letters = ref('MES\u00A0PROJETS'.split(''))
+const letters = ref('Mes\u00A0Projets'.split(''))
 const orbVisible = ref(false)
 
 let ctx: gsap.Context | null = null
