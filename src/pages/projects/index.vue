@@ -56,10 +56,10 @@
 
       <!-- Overlay violet -->
       <div
-        class="overlay absolute top-0 right-0 h-full w-0 opacity-0 flex flex-col text-white z-20"
+        class="overlay absolute top-0 right-0 h-full w-0 opacity-0 flex flex-col text-center text-white z-20"
       >
-        <p class="font-bold text-lg text-nowrap">{{ project.nomProjet }}</p>
-        <p class="text-sm text-nowrap">
+        <p class="font-bold text-lg">{{ project.nomProjet }}</p>
+        <p class="text-sm">
           {{ new Date(project.dateProjet).toLocaleDateString('fr-FR') }}
         </p>
       </div>

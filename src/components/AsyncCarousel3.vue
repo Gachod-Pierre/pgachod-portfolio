@@ -71,7 +71,7 @@ const thumbnailsConfig = {
         <img
           :src="image.url"
           :alt="`${project?.nomProjet || 'Project'} - Gallery Image`"
-          class="gallery-image"
+          class="w-auto max-h-[90vh]"
         />
       </Slide>
     </Carousel>
@@ -85,7 +85,7 @@ const thumbnailsConfig = {
       <Slide v-for="(image, index) in images" :key="image.id">
         <template #default="{ isActive }">
           <div :class="['thumbnail', { 'is-active': isActive }]" @click="slideTo(index)">
-            <img :src="image.url" alt="Thumbnail Image" class="thumbnail-image" />
+            <img :src="image.url" alt="Thumbnail Image" class="w-full h-[10vh]" />
           </div>
         </template>
       </Slide>
