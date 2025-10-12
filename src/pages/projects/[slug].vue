@@ -11,8 +11,6 @@ const project = ref<any>(null)
 const loading = ref(true)
 const error = ref('')
 
-const AsyncCarousel3 = defineAsyncComponent(() => import('@/components/AsyncCarousel3.vue'))
-
 function slugify(str: string) {
   return String(str)
     .normalize('NFD')
@@ -22,6 +20,9 @@ function slugify(str: string) {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 }
+
+const AsyncCarousel3Loader = () => import('@/components/AsyncCarousel3.vue')
+const AsyncCarousel3 = defineAsyncComponent(AsyncCarousel3Loader)
 
 const loadProject = async () => {
   try {
@@ -36,10 +37,13 @@ const loadProject = async () => {
     }
 
     project.value = found
+
+    // attendre que le module soit importé avant d'enlever le loader
+    await AsyncCarousel3Loader()
+    loading.value = false
   } catch (err) {
     console.error('Erreur lors du chargement du projet:', err)
     error.value = 'Projet non trouvé'
-  } finally {
     loading.value = false
   }
 }
