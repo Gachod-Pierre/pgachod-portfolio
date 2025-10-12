@@ -8,8 +8,11 @@ const route = useRoute()
 const router = useRouter()
 
 const project = ref<any>(null)
+const images = ref<{ id: number; url: string | undefined }[]>([])
 const loading = ref(true)
 const error = ref('')
+
+const AsyncCarousel3 = defineAsyncComponent(() => import('@/components/AsyncCarousel3.vue'))
 
 function slugify(str: string) {
   return String(str)
@@ -21,33 +24,6 @@ function slugify(str: string) {
     .replace(/^-+|-+$/g, '')
 }
 
-const AsyncCarousel3Loader = () => import('@/components/AsyncCarousel3.vue')
-const AsyncCarousel3 = defineAsyncComponent(AsyncCarousel3Loader)
-
-const loadProject = async () => {
-  try {
-    loading.value = true
-    const slug = (route.params as { slug?: string })?.slug ?? ''
-
-    const all = await pb.collection('projets').getFullList()
-    const found = all.find((p: any) => (p.slug ?? slugify(p.nomProjet)) === slug)
-
-    if (!found) {
-      throw new Error('Projet introuvable')
-    }
-
-    project.value = found
-
-    // attendre que le module soit importé avant d'enlever le loader
-    await AsyncCarousel3Loader()
-    loading.value = false
-  } catch (err) {
-    console.error('Erreur lors du chargement du projet:', err)
-    error.value = 'Projet non trouvé'
-    loading.value = false
-  }
-}
-
 const getImageUrl = (project: any, imageIndex: number = 0): string | undefined => {
   if (project?.imageProjet?.[imageIndex]) {
     return pb.getFileUrl(project, project.imageProjet[imageIndex])
@@ -55,13 +31,39 @@ const getImageUrl = (project: any, imageIndex: number = 0): string | undefined =
   return undefined
 }
 
-const goBack = () => {
-  router.back()
+const loadProjectWithImages = async () => {
+  try {
+    loading.value = true
+    const slug = (route.params as { slug?: string })?.slug ?? ''
+    const all = await pb.collection('projets').getFullList()
+    const found = all.find((p: any) => (p.slug ?? slugify(p.nomProjet)) === slug)
+
+    if (!found) throw new Error('Projet introuvable')
+
+    project.value = found
+
+    // Images du projet
+    if (found.imageProjet?.length) {
+      images.value = found.imageProjet
+        .map((_: any, index: number) => ({
+          id: index,
+          url: getImageUrl(found, index)
+        }))
+        .filter((img) => img.url)
+    } else {
+      images.value = []
+    }
+  } catch (err) {
+    console.error('Erreur lors du chargement du projet:', err)
+    error.value = 'Projet non trouvé'
+  } finally {
+    loading.value = false
+  }
 }
 
-onMounted(() => {
-  loadProject()
-})
+const goBack = () => router.back()
+
+onMounted(loadProjectWithImages)
 </script>
 
 <template>
@@ -250,7 +252,7 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <AsyncCarousel3 />
+        <AsyncCarousel3 :images="images" :projectName="project.nomProjet" />
       </div>
     </div>
   </div>
