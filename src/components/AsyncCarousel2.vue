@@ -32,6 +32,16 @@ const loadProjects = async () => {
   }
 }
 
+function slugify(str: string) {
+  return String(str)
+    .normalize('NFD')                // remove accents
+    .replace(/[\u0300-\u036f]/g, '') // remove diacritics
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
 onMounted(() => {
   loadProjects()
 })
@@ -45,7 +55,7 @@ onMounted(() => {
       v-bind="config2"
     >
       <Slide class="lg:px-20" v-for="project in projects" :key="project.id">
-        <RouterLink class="w-full h-fit" :to="`/projects/${project.id}`">
+        <RouterLink class="w-full h-fit" :to="`/projects/${project.slug ?? slugify(project.nomProjet)}`">
           <div class="grid grid-cols-2 md:grid-cols-4 grid-rows-8 gap-3 md:gap-5 w-full h-fit px-1">
             <!-- Titre du projet -->
             <div

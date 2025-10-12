@@ -20,28 +20,67 @@ const getImageUrl = (projectData: any, imageIndex: number = 0): string | undefin
   return undefined
 }
 
+function slugify(str: string) {
+  return String(str)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
 const loadProjectImages = async () => {
   try {
-    const projectId = (route.params as { id?: string }).id
-    if (!projectId) {
-      throw new Error('Project ID is missing in route params')
+    const params = route.params as { id?: string; slug?: string }
+    const idParam = params.id
+    const slugParam = params.slug
+
+    let projectData: any = null
+
+    if (idParam) {
+      // ancien comportement : id direct
+      projectData = await pb.collection('projets').getOne(idParam)
+    } else if (slugParam) {
+      // 1) si vous avez un champ `slug` côté PocketBase, essayer une requête filtrée
+      try {
+        const res = await pb.collection('projets').getList(1, 1, {
+          filter: `slug = "${slugParam}"`
+        })
+        if (res.items && res.items.length) projectData = res.items[0]
+      } catch (e) {
+        // ignore si le filtre n'est pas supporté / champ absent
+      }
+
+      // 2) fallback : récupérer tout et comparer avec slugify(nomProjet) ou p.slug
+      if (!projectData) {
+        const all = await pb.collection('projets').getFullList()
+        projectData = all.find((p: any) => (p.slug ?? slugify(p.nomProjet)) === slugParam)
+      }
+    } else {
+      throw new Error('Project id/slug missing in route params')
     }
-    const projectData = await pb.collection('projets').getOne(projectId)
+
+    if (!projectData) throw new Error('Project not found')
+
     project.value = projectData
 
     if (projectData?.imageProjet?.length) {
       images.value = projectData.imageProjet
-        .map((_, index) => ({
+        .map((_: any, index: number) => ({
           id: index,
           url: getImageUrl(projectData, index)
         }))
         .filter((image) => image.url)
+    } else {
+      images.value = []
     }
   } catch (error) {
     console.error('Erreur lors du chargement du projet:', error)
+    images.value = []
   }
 }
-
+// ...existing code...
 onMounted(() => {
   loadProjectImages()
 })
