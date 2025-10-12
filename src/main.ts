@@ -11,7 +11,8 @@ const app = createApp(App)
 
 app.use(
   createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(import.meta.env.BASE_URL),
+
     // pass the generated routes written by the plugin 🤖
     routes: routes,
     scrollBehavior(to, from, savedPosition) {
