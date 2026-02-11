@@ -290,14 +290,16 @@ useIntersectionObserver(
     if (isIntersecting && !hasAnimated) {
       hasAnimated = true
       charsVisible.value = true
-      
+
       // Animation GSAP
-      gsap.fromTo(letsWorkRef.value,
+      gsap.fromTo(
+        letsWorkRef.value,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
       )
-      
-      gsap.fromTo(togetherRef.value,
+
+      gsap.fromTo(
+        togetherRef.value,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' }
       )
@@ -349,8 +351,14 @@ useIntersectionObserver(
               class="mb-2 oscillate w-[23.57px] h-3.5"
               preserveAspectRatio="none"
             >
-              <path d="M1 6L12.6913 15L24.3827 6" class="stroke-white group-hover:stroke-purple-500 transition-colors duration-300" />
-              <path d="M1.19135 1L12.8827 10L24.574 1" class="stroke-white group-hover:stroke-purple-500 transition-colors duration-300" />
+              <path
+                d="M1 6L12.6913 15L24.3827 6"
+                class="stroke-white group-hover:stroke-purple-500 transition-colors duration-300"
+              />
+              <path
+                d="M1.19135 1L12.8827 10L24.574 1"
+                class="stroke-white group-hover:stroke-purple-500 transition-colors duration-300"
+              />
             </svg>
             <p class="text-xl font-bold">
               Scroll <span class="text-xl font-light">to</span> Discover
@@ -441,7 +449,8 @@ useIntersectionObserver(
       class="section-snap snap-start flex flex-col justify-center gap-[7dvh] items-start w-full max-h-full bg-black text-white"
     >
       <h2 class="flex flex-col lg:flex-row gap-0 lg:gap-2 text-left border-b border-white w-fit">
-        <span ref="letsWorkRef" class="title3 animate-hidden">Let's Work</span><br class="lg:block hidden" />
+        <span ref="letsWorkRef" class="title3 animate-hidden">Let's Work</span
+        ><br class="lg:block hidden" />
         <span ref="togetherRef" class="title4 animate-hidden">Together !</span>
       </h2>
       <div class="flex justify-center items-center">
