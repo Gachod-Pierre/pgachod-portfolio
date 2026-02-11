@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, reactive, type Component, defineAsyncComponent } from 'vue'
 import { pb } from '@/backend'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 import 'vue3-carousel/dist/carousel.css'
 import { useIntersectionObserver } from '@vueuse/core'
@@ -276,15 +280,32 @@ function scrollToSection() {
 
 const section4Ref = ref<HTMLElement | null>(null)
 const charsVisible = ref(false)
+const letsWorkRef = ref<HTMLElement | null>(null)
+const togetherRef = ref<HTMLElement | null>(null)
+let hasAnimated = false
 
 useIntersectionObserver(
   section4Ref,
   ([{ isIntersecting }]) => {
-    if (isIntersecting) {
+    if (isIntersecting && !hasAnimated) {
+      hasAnimated = true
       charsVisible.value = true
+      
+      // Animation GSAP
+      gsap.fromTo(letsWorkRef.value,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+      )
+      
+      gsap.fromTo(togetherRef.value,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power2.out' }
+      )
+    } else if (!isIntersecting) {
+      hasAnimated = false
     }
   },
-  { threshold: 0.5 }
+  { threshold: 0.3 }
 )
 </script>
 
@@ -420,8 +441,8 @@ useIntersectionObserver(
       class="section-snap snap-start flex flex-col justify-center gap-[7dvh] items-start w-full max-h-full bg-black text-white"
     >
       <h2 class="flex flex-col lg:flex-row gap-0 lg:gap-2 text-left border-b border-white w-fit">
-        <span class="title3">Let's Work</span><br class="lg:block hidden" />
-        <span class="title4">Together !</span>
+        <span ref="letsWorkRef" class="title3 animate-hidden">Let's Work</span><br class="lg:block hidden" />
+        <span ref="togetherRef" class="title4 animate-hidden">Together !</span>
       </h2>
       <div class="flex justify-center items-center">
         <RouterLink
@@ -446,6 +467,11 @@ useIntersectionObserver(
   top: 50%;
   left: 50%;
   text-align: center;
+}
+
+.animate-hidden {
+  opacity: 0;
+  transform: translateY(30px);
 }
 
 .cta {

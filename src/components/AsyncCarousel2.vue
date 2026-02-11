@@ -25,7 +25,9 @@ const projects = ref<any[]>([])
 
 const loadProjects = async () => {
   try {
-    projects.value = await pb.collection('projets').getFullList()
+    projects.value = await pb.collection('projets').getFullList({
+      sort: '-dateProjet'
+    })
     config2.autoplayEnabled = true
   } catch (error) {
     console.error('Erreur lors du chargement des projets:', error)
@@ -34,7 +36,7 @@ const loadProjects = async () => {
 
 function slugify(str: string) {
   return String(str)
-    .normalize('NFD')                // remove accents
+    .normalize('NFD') // remove accents
     .replace(/[\u0300-\u036f]/g, '') // remove diacritics
     .toLowerCase()
     .trim()
@@ -55,7 +57,10 @@ onMounted(() => {
       v-bind="config2"
     >
       <Slide class="lg:px-20" v-for="project in projects" :key="project.id">
-        <RouterLink class="w-full h-fit" :to="`/projects/${project.slug ?? slugify(project.nomProjet)}`">
+        <RouterLink
+          class="w-full h-fit"
+          :to="`/projects/${project.slug ?? slugify(project.nomProjet)}`"
+        >
           <div class="grid grid-cols-2 md:grid-cols-4 grid-rows-8 gap-3 md:gap-5 w-full h-fit px-1">
             <!-- Titre du projet -->
             <div
@@ -102,7 +107,7 @@ onMounted(() => {
             <div
               class="hidden md:flex items-center justify-center border border-white col-span-2 md:col-span-1 row-span-2 rounded-3xl col-start-1 md:col-start-3 row-start-17 md:row-start-7"
             >
-              <GeometricShapes />
+              <GeometricShapes :seed="project.id" />
             </div>
             <!-- see more -->
             <div
@@ -110,7 +115,7 @@ onMounted(() => {
             >
               <RouterLink
                 class="hover:scale-105 font-extrabold ease-in-out duration-100 w-full h-full flex items-center justify-center"
-                :to="`/projects/${project.id}`"
+                :to="`/projects/${project.slug ?? slugify(project.nomProjet)}`"
               >
                 &lt;/see project&gt;
               </RouterLink>
